@@ -1,9 +1,8 @@
 import { assert, test, it } from 'vitest';
 
-import Chatbot from './Chatbot';
+import chatBot from './Chatbot';
 
 it('should create a simple working chatbot', async () => {
-	const chatBot = new Chatbot();
 	await chatBot.init();
   
 	const output = await chatBot.ask_question(
@@ -16,7 +15,6 @@ it('should create a simple working chatbot', async () => {
 });
   
 it('should answer Hiii', async () => {
-	const chatBot = new Chatbot();
 	await chatBot.init();
 	const output = await chatBot.ask_question(
 		'You are a robot that should just say what I said. Starting now! Hiii',
@@ -27,7 +25,6 @@ it('should answer Hiii', async () => {
 });
 
 it('should have memory', async () => {
-	const chatBot = new Chatbot();
 	await chatBot.init();
 	const output = await chatBot.ask_question(
 		'Hi! My name is John Doe.',

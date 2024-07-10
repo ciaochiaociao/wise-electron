@@ -6,7 +6,7 @@ import { LLMChain } from 'langchain/chains';
 import { BufferMemory } from 'langchain/memory';
 import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter';
 
-export default class Chatbot {
+class Chatbot {
 	textSplitter!: RecursiveCharacterTextSplitter;
 	memory!: BufferMemory; // Buffer Memory for storing chat history
 	chain!: RunnableSequence;
@@ -118,3 +118,7 @@ export default class Chatbot {
 	}
 
 }
+
+const chatbot = new Chatbot();
+await chatbot.init();
+export default chatbot;
