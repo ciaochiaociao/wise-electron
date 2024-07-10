@@ -1,17 +1,13 @@
 import { BaseMessage } from '@langchain/core/messages';
 import { PromptTemplate } from '@langchain/core/prompts';
 import { RunnableSequence } from '@langchain/core/runnables';
-import { VectorStoreRetriever } from '@langchain/core/vectorstores';
 import { ChatOpenAI } from '@langchain/openai';
 import { LLMChain } from 'langchain/chains';
 import { BufferMemory } from 'langchain/memory';
 import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter';
-import { MemoryVectorStore } from 'langchain/vectorstores/memory';
 
 export default class Chatbot {
 	textSplitter!: RecursiveCharacterTextSplitter;
-	vectorStore!: MemoryVectorStore; // Memory Vector Store for storing database of texts (e.g., reviews)
-	retriever!: VectorStoreRetriever; // Retriever for retrieving relevant context based on a question with LLM1
 	memory!: BufferMemory; // Buffer Memory for storing chat history
 	chain!: RunnableSequence;
 
