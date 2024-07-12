@@ -1,4 +1,5 @@
 import { ipcRenderer, contextBridge } from 'electron'
+import brightness from 'brightness'
 
 // --------- Expose some API to the Renderer process ---------
 contextBridge.exposeInMainWorld('ipcRenderer', {
@@ -21,4 +22,11 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
 
   // You can expose other APTs you need here.
   // ...
+})
+
+contextBridge.exposeInMainWorld('systemControls', {
+  setBrightness: (value: number) => {
+    console.log(value)
+    ipcRenderer.send('set-brightness', value);
+  },
 })

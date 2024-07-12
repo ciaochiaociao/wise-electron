@@ -20,3 +20,9 @@ electron.contextBridge.exposeInMainWorld("ipcRenderer", {
   // You can expose other APTs you need here.
   // ...
 });
+electron.contextBridge.exposeInMainWorld("systemControls", {
+  setBrightness: (value) => {
+    console.log(value);
+    electron.ipcRenderer.send("set-brightness", value);
+  }
+});

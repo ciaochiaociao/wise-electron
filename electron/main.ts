@@ -1,13 +1,14 @@
-import { app, BrowserWindow, session } from 'electron'
+import { app, BrowserWindow, session, ipcMain } from 'electron'
 import { createRequire } from 'node:module'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
 
-import os from 'os'
+
 
 const require = createRequire(import.meta.url)
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
+const brightness = require('brightness')
 // The built directory structure
 //
 // ├─┬─┬ dist
@@ -34,6 +35,10 @@ function createWindow() {
     webPreferences: {
       preload: path.join(__dirname, 'preload.mjs'),
     },
+  })
+  ipcMain.on('set-brightness', (event, value: number) => {
+    brightness.set(value)
+    console.log("set brightness in the main process")
   })
 
   // Test active push message to Renderer-process.
