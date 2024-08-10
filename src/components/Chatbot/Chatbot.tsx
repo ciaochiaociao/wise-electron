@@ -1,12 +1,12 @@
 import config from './config.js';
 
 // @ts-ignore
-import MessageParser from './MessageParser.jsx';
+import MessageParser from './MessageParser.jsx'
 // @ts-ignore
-import ActionProvider from './ActionProvider.jsx';
+import ActionProvider from './ActionProvider.jsx'
 
-import Chatbot from 'react-chatbot-kit'
-import 'react-chatbot-kit/build/main.css'
+import Chatbot from '../../react-chatbot-kit/src/components/Chatbot/Chatbot'
+import '../../react-chatbot-kit/src/main.css'
 import chatbot from '../../processes/Chatbot'
 
 import { useRef, useEffect, useState } from 'react'

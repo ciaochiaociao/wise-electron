@@ -16,8 +16,8 @@
     "mmap-io": "^1.1.7",
     "nircmd": "^2.0.0",
     "react": "^18.2.0",
-    "react-chatbot-kit": "file:../react-chatbot-kit",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-conditionally-render": "^1.0.2"
   },
   "devDependencies": {
     "@types/electron": "^1.6.10",
