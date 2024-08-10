@@ -13,12 +13,14 @@
   "dependencies": {
     "brightness": "^3.0.0",
     "langchain": "^0.2.8",
+    "mmap-io": "^1.1.7",
     "nircmd": "^2.0.0",
     "react": "^18.2.0",
-    "react-chatbot-kit": "^2.2.2",
+    "react-chatbot-kit": "file:../react-chatbot-kit",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@types/electron": "^1.6.10",
     "@types/react": "^18.2.64",
     "@types/react-dom": "^18.2.21",
     "@typescript-eslint/eslint-plugin": "^7.1.1",

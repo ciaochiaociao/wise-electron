@@ -4,7 +4,17 @@ import electron from 'vite-plugin-electron/simple'
 import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
-export default defineConfig({
+export default defineConfig({  // https://github.com/vitejs/vite/issues/17717
+  // no need for this fix anymore after we use monorepo with multiple packages
+  // // Fail to import default from a commonjs package, react-conditionally-render, from a file (react-chatbot-kit) in node_modules with optimizeDeps.exclude config
+  // optimizeDeps: {
+  //   include: ['react-conditionally-render', 'react-chatbot-kit'],
+  // },
+  // build: {
+  //   commonjsOptions: {
+  //     include: [/react-conditionally-render/, /react-chatbot-kit/, /node_modules/]
+  //   }
+  // },
   plugins: [
     react(),
     electron({

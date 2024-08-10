@@ -26,3 +26,8 @@ electron.contextBridge.exposeInMainWorld("systemControls", {
     electron.ipcRenderer.send("set-brightness", value);
   }
 });
+electron.contextBridge.exposeInMainWorld("hmx", {
+  getEmotion: async () => {
+    return await electron.ipcRenderer.invoke("get-emotion");
+  }
+});

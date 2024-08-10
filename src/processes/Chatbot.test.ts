@@ -1,4 +1,4 @@
-import { assert, test, it } from 'vitest';
+import { assert, it } from 'vitest';
 
 import chatBot from './Chatbot';
 

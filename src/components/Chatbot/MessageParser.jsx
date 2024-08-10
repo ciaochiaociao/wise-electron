@@ -1,8 +1,26 @@
 import React from 'react';
 
-const MessageParser = ({ children, actions }) => {
+const MessageParser = ({ children, actions, emotionDetection, setEmotionDetection }) => {
   const parse = (message) => {
+    
+    // console.log("Testing storage event:")
+    // localStorage.setItem("boostMood", "true");
 
+    if (emotionDetection === "asking") {
+      if (message === "yes") {
+        setEmotionDetection("boosting mood");
+        actions.handleBoostMood();
+        console.log("User answers yes to boosting mood");
+      } else if (message === "no") {
+        setEmotionDetection("detecting");
+        console.log("User answers no mood boost");
+      } else {
+        console.warn("User answers with something else (to be handled)");
+        // todo: handle other answers
+        actions.handleGeneralChat(message);
+      }
+      return;
+    }
     const brightnessRegex = /Set the brightness to (\d*\.?\d*%?)/i;
     const brightnessMatch = message.match(brightnessRegex);
 

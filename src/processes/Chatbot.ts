@@ -56,7 +56,6 @@ class Chatbot {
 		})
 		const QAChain = new LLMChain({
 			llm: QAModel,
-			// @ts-expect-error: missing properties _streamevents
 			prompt: questionPrompt,
 		})
 
@@ -130,5 +129,5 @@ class Chatbot {
 }
 
 const chatbot = new Chatbot()
-await chatbot.init()
+chatbot.init()
 export default chatbot

@@ -1,5 +1,5 @@
 import { ipcRenderer, contextBridge } from 'electron'
-import brightness from 'brightness'
+// import brightness from 'brightness'
 
 // --------- Expose some API to the Renderer process ---------
 contextBridge.exposeInMainWorld('ipcRenderer', {
@@ -28,5 +28,11 @@ contextBridge.exposeInMainWorld('systemControls', {
   setBrightness: (value: number) => {
     console.log(value)
     ipcRenderer.send('set-brightness', value);
+  },
+})
+
+contextBridge.exposeInMainWorld('hmx', {
+  getEmotion: async () => {
+    return await ipcRenderer.invoke('get-emotion')
   },
 })
