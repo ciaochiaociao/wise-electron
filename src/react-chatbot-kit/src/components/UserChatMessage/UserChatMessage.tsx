@@ -1,4 +1,3 @@
-import React from 'react';
 import ConditionallyRender from 'react-conditionally-render';
 
 import { callIfExists } from '../Chat/chatUtils';

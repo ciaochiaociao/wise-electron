@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, SetStateAction } from 'react';
+import React, { useState, useEffect, SetStateAction } from 'react';
 import ConditionallyRender from 'react-conditionally-render';
 
 import UserChatMessage from '../UserChatMessage/UserChatMessage';
@@ -20,7 +20,6 @@ import {
   ICustomStyles,
 } from '../../interfaces/IConfig';
 import { IMessage } from '../../interfaces/IMessages';
-import { string } from 'prop-types';
 
 interface IChatProps {
   setState: React.Dispatch<SetStateAction<any>>;

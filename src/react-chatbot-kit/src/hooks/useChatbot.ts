@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import {
   createClientMessage,
   createChatBotMessage,
@@ -19,8 +19,8 @@ interface IUseChatbotParams {
   config: IConfig | null;
   actionProvider: any;
   messageParser: any;
-  messageHistory: IMessage[] | string;
-  saveMessages: (messages: IMessage[], html: string) => any | null;
+  messageHistory?: IMessage[] | string;
+  saveMessages?: (messages: IMessage[], html: string) => any | null;
   runInitialMessagesWithHistory?: Boolean;
 }
 

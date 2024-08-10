@@ -1,14 +1,41 @@
 import React from 'react';
 import chatbot from '../../processes/Chatbot'
 
-const ActionProvider = ({ createChatBotMessage, setState, children, emotionDetection, setEmotionDetection }) => {
+declare global {
+  interface Window {
+    systemControls: {
+      setBrightness: (value: number) => void
+    }
+  }
+}
+
+interface ActionProviderProps {
+  children: React.ReactNode;
+  emotionDetection: string;
+  setEmotionDetection: (value: string) => void;
+  createChatBotMessage: (message: string) => any;
+  setState: (value: any) => void;
+}
+
+export type Actions = {
+  handleSetBrightness: (message: string, value: number) => void
+  handleGeneralChat: (message: string) => void
+  handleBoostMood: () => void
+}
+
+interface ChildProps {
+  actions: Actions;
+}
+
+
+const ActionProvider: React.FC<ActionProviderProps> = ({ createChatBotMessage, setState, children, emotionDetection, setEmotionDetection }) => {
   
   const handleBoostMood = () => {
     console.log("Boosting mood!");
     setEmotionDetection("boosting mood");
     const botMessageStr = "Boosting mood!";
     chatbot.addAIMessageToChatHistory(botMessageStr);
-    setState((prev) => {
+    setState((prev: any) => {
       const botMessage = createChatBotMessage(botMessageStr);
 
       return {
@@ -22,7 +49,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children, emotionDetec
       setEmotionDetection("detecting");
       const botMessageStr = "Finished boosting mood!";
       chatbot.addAIMessageToChatHistory(botMessageStr);
-      setState((prev) => {
+      setState((prev: any) => {
         const botMessage = createChatBotMessage(botMessageStr);
 
         return {
@@ -34,17 +61,17 @@ const ActionProvider = ({ createChatBotMessage, setState, children, emotionDetec
     setTimeout(finishBoostingCallback, 4000);
   }
 
-  const handleSetBrightness = (message, value) => {
+  const handleSetBrightness = (message: string, value: number) => {
     let botMessageStr;
     if ( value < 0 || value > 1) {
       console.log("Brightness value must be between 0 and 1 :(");
       botMessageStr = "Brightness value must be between 0 and 1 :(";
     } else {
       console.log("Set Screen Brightness");
-      systemControls.setBrightness(value);
+      window.systemControls.setBrightness(value);
       botMessageStr = "Screen brightness set to " + value + ".";
     }
-    setState((prev) => {
+    setState((prev: any) => {
       chatbot.addHumanMessageToChatHistory(message);
       chatbot.addAIMessageToChatHistory(botMessageStr);
       const botMessage = createChatBotMessage(botMessageStr);
@@ -55,11 +82,11 @@ const ActionProvider = ({ createChatBotMessage, setState, children, emotionDetec
     }});
   }
   
-  const handleGeneralChat = async (userInput) => {
+  const handleGeneralChat = async (userInput: string) => {
     const message = await chatbot.ask_question(userInput);
     const messageStr = message['result'];
 
-    setState((prev) => {
+    setState((prev: any) => {
       const botMessage = createChatBotMessage(messageStr);
 
       return {
@@ -71,13 +98,17 @@ const ActionProvider = ({ createChatBotMessage, setState, children, emotionDetec
   return (
     <div>
       {React.Children.map(children, (child) => {
-        return React.cloneElement(child, {
-          actions: {
-            handleSetBrightness,
-            handleGeneralChat,
-            handleBoostMood,
-          },
-        });
+        if (React.isValidElement<ChildProps>(child)) {
+          return React.cloneElement(child as React.ReactElement<ChildProps>, {
+            actions: {
+              handleSetBrightness,
+              handleGeneralChat,
+              handleBoostMood,
+            },
+          });
+        } else {
+          return child;
+        }
       })}
     </div>
   );

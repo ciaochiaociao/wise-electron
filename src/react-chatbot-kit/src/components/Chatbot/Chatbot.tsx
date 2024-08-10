@@ -24,7 +24,7 @@ interface IChatbotProps {
   config: IConfig;
   headerText?: string;
   placeholderText?: string;
-  saveMessages?: (ref: any) => any;
+  saveMessages?: (messages: IMessage[], html: string) => any;
   messageHistory?: IMessage[] | string;
   validator?: (input: string) => Boolean;
   runInitialMessagesWithHistory?: Boolean;
