@@ -1,6 +1,7 @@
 # wise-electron
  An edge-AI and LLM powered Smart Assistant in laptop
 
-```
-yarn dev
+```bash
+$ yarn
+$ yarn dev
 ```
