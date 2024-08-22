@@ -11,7 +11,7 @@ import {
   createChatMessage,
 } from './chatUtils';
 
-import ChatIcon from '../../assets/icons/paper-plane.svg';
+import ChatIcon from '../../assets/icons/paper-plane.svg?react';
 
 import './Chat.css';
 import {
