@@ -17,7 +17,7 @@ import { useState } from 'react'
 
 
 function App() {
-  const [activePage, setActivePage] = useState('');
+  const [activePage, setActivePage] = useState('ChartPage');
 
   return (
     <>
