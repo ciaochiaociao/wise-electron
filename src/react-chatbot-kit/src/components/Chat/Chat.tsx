@@ -11,7 +11,7 @@ import {
   createChatMessage,
 } from './chatUtils';
 
-// import ChatIcon from '../../assets/icons/paper-plane.svg';
+import ChatIcon from '../../assets/icons/paper-plane.svg';
 
 import './Chat.css';
 import {
@@ -312,7 +312,7 @@ const Chat = ({
               className="react-chatbot-kit-chat-btn-send"
               style={customButtonStyle}
             >
-              {/* <ChatIcon className="react-chatbot-kit-chat-btn-send-icon" /> */}
+              <ChatIcon className="react-chatbot-kit-chat-btn-send-icon" />
             </button>
           </form>
         </div>

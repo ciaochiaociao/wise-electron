@@ -2,7 +2,7 @@ import ConditionallyRender from 'react-conditionally-render';
 
 import { callIfExists } from '../Chat/chatUtils';
 
-// import UserIcon from '../../assets/icons/user-alt.svg';
+import UserIcon from '../../assets/icons/user-alt.svg';
 
 import './UserChatMessage.css';
 import { ICustomComponents } from '../../interfaces/IConfig';
@@ -36,7 +36,7 @@ const UserChatMessage = ({
         elseShow={
           <div className="react-chatbot-kit-user-avatar">
             <div className="react-chatbot-kit-user-avatar-container">
-              {/* <UserIcon className="react-chatbot-kit-user-avatar-icon" /> */}
+              <UserIcon className="react-chatbot-kit-user-avatar-icon" />
             </div>
           </div>
         }
