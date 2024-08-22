@@ -1,6 +1,10 @@
 import './App.css'
 import { MyChatbot } from './components/Chatbot/Chatbot'
+import EmotionDashboard from './pages/EmotionDashboard'
+import Sidebar from './components/Sidebar/Sidebar'
+import SidebarContainer from './components/SidebarContainer/SidebarContainer'
 
+import { useState } from 'react'
 // window.addEventListener("storage", () => {
 //   console.log("Storage event")
 //   const boostMood = localStorage.getItem("boostMood")
@@ -12,12 +16,22 @@ import { MyChatbot } from './components/Chatbot/Chatbot'
 // })
 
 
-
 function App() {
+  const [activePage, setActivePage] = useState('');
 
   return (
     <>
-      <MyChatbot />
+      <SidebarContainer>
+        <Sidebar>
+          <ul className='list-none p-0'>
+            <li className='cursor-pointer p-2 hover:bg-gray-700 text-white' onClick={() => setActivePage('MyChatbot')}>Chatbot</li>
+            <li className='cursor-pointer p-2 hover:bg-gray-700 text-white' onClick={() => setActivePage('ChartPage')}>Chart Page</li>
+          </ul>
+        </Sidebar>
+        {activePage === 'MyChatbot' && <MyChatbot />}
+        {activePage === 'ChartPage' && <EmotionDashboard />}
+      </SidebarContainer>
+      
     </>
   )
 }

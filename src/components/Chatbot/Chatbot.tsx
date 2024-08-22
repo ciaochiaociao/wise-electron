@@ -55,9 +55,9 @@ export const MyChatbot = () => {
   // alert(emotionDetection)
 
   return (
-    <div>
-      <button onClick={() => setEmotionDetection("not bad")}>Not bad!</button>
-      <button onClick={() => setEmotionDetection("detecting")}>Detecting!</button>
+    <>
+      {/* <button onClick={() => setEmotionDetection("not bad")}>Not bad!</button>
+      <button onClick={() => setEmotionDetection("detecting")}>Detecting!</button> */}
       <Chatbot
         config={config}
         messageParser={MessageParser}
@@ -66,6 +66,6 @@ export const MyChatbot = () => {
         emotionDetection={emotionDetection}
         setEmotionDetection={setEmotionDetection}
       />
-    </div>
+    </>
   );
 };
