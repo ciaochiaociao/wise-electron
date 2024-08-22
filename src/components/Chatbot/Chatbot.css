@@ -5,10 +5,16 @@
 .react-chatbot-kit-chat-inner-container {
   width: 100%;
 }
-/*
+
 .react-chatbot-kit-chat-header {
+  display: none; /* invisible */
 }
 
+.react-chatbot-kit-chat-bot-message {
+  /* set back to default */
+  margin: 0 0;
+}
+/*
 .react-chatbot-kit-chat-input-container {
 }
 
@@ -42,8 +48,6 @@
 .react-chatbot-kit-chat-bot-avatar-letter {
 }
 
-.react-chatbot-kit-chat-bot-message {
-}
 
 .react-chatbot-kit-chat-bot-message-arrow {
 }

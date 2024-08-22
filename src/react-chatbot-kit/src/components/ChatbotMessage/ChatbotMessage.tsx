@@ -90,6 +90,13 @@ const ChatbotMessage = ({
                 elseShow={<ChatbotMessageAvatar />}
               />
             }
+            elseShow={
+              <ConditionallyRender
+                condition={!!customComponents?.botAvatar}
+                show={callIfExists(customComponents?.botAvatar)}
+                elseShow={<ChatbotMessageAvatar className="invisible"/>}
+              />
+            }
           />
 
           <ConditionallyRender
