@@ -3,7 +3,7 @@ import { MyChatbot } from './components/Chatbot/Chatbot'
 import EmotionDashboard from './pages/EmotionDashboard'
 import Sidebar from './components/Sidebar/Sidebar'
 import SidebarContainer from './components/SidebarContainer/SidebarContainer'
-
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary'
 import { useState } from 'react'
 // window.addEventListener("storage", () => {
 //   console.log("Storage event")
@@ -28,7 +28,7 @@ function App() {
             <li className='cursor-pointer p-2 hover:bg-gray-700 text-white' onClick={() => setActivePage('ChartPage')}>Chart Page</li>
           </ul>
         </Sidebar>
-        {activePage === 'MyChatbot' && <MyChatbot />}
+        {activePage === 'MyChatbot' && <ErrorBoundary><MyChatbot /></ErrorBoundary>}
         {activePage === 'ChartPage' && <EmotionDashboard />}
       </SidebarContainer>
       
