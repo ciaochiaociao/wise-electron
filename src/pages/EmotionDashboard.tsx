@@ -69,7 +69,7 @@ const EmotionDashboard = () => {
           min="0" 
           max="100" 
           value={overallMood} 
-          onChange={(e) => setOverallMood(e.target.value)}
+          onChange={(e) => setOverallMood(Number(e.target.value))}
           className="w-full"
         />
         <div className="flex justify-between mt-2">

@@ -48,6 +48,7 @@ export const getCustomMessages = (config: IConfig) => {
   return {};
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const validateProps = (config: IConfig, MessageParser: any) => {
   const errors = [];
   if (!config.initialMessages) {
@@ -66,6 +67,7 @@ export const validateProps = (config: IConfig, MessageParser: any) => {
   return errors;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const isConstructor = (func: any) => {
   try {
     new func();

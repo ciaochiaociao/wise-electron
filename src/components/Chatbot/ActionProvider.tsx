@@ -13,7 +13,9 @@ interface ActionProviderProps {
   children: React.ReactNode;
   emotionDetection: string;
   setEmotionDetection: (value: string) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   createChatBotMessage: (message: string) => any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setState: (value: any) => void;
 }
 
@@ -27,7 +29,7 @@ interface ChildProps {
   actions: Actions;
 }
 
-
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const ActionProvider: React.FC<ActionProviderProps> = ({ createChatBotMessage, setState, children, emotionDetection, setEmotionDetection }) => {
   
   const handleBoostMood = () => {
@@ -35,6 +37,7 @@ const ActionProvider: React.FC<ActionProviderProps> = ({ createChatBotMessage, s
     setEmotionDetection("boosting mood");
     const botMessageStr = "Boosting mood!";
     chatbot.addAIMessageToChatHistory(botMessageStr);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     setState((prev: any) => {
       const botMessage = createChatBotMessage(botMessageStr);
 
@@ -49,6 +52,7 @@ const ActionProvider: React.FC<ActionProviderProps> = ({ createChatBotMessage, s
       setEmotionDetection("detecting");
       const botMessageStr = "Finished boosting mood!";
       chatbot.addAIMessageToChatHistory(botMessageStr);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       setState((prev: any) => {
         const botMessage = createChatBotMessage(botMessageStr);
 
@@ -71,6 +75,7 @@ const ActionProvider: React.FC<ActionProviderProps> = ({ createChatBotMessage, s
       window.systemControls.setBrightness(value);
       botMessageStr = "Screen brightness set to " + value + ".";
     }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     setState((prev: any) => {
       chatbot.addHumanMessageToChatHistory(message);
       chatbot.addAIMessageToChatHistory(botMessageStr);
@@ -86,6 +91,7 @@ const ActionProvider: React.FC<ActionProviderProps> = ({ createChatBotMessage, s
     const message = await chatbot.ask_question(userInput);
     const messageStr = message['result'];
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     setState((prev: any) => {
       const botMessage = createChatBotMessage(messageStr);
 

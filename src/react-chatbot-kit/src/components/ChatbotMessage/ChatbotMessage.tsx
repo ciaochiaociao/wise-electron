@@ -12,9 +12,11 @@ interface IChatbotMessageProps {
   message: string;
   withAvatar?: boolean;
   loading?: boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   messages: any[];
   delay?: number;
   id: number;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setState?: React.Dispatch<React.SetStateAction<any>>;
   customComponents?: ICustomComponents;
   customStyles?: { backgroundColor: string };
@@ -33,9 +35,12 @@ const ChatbotMessage = ({
   const [show, toggleShow] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let timeoutId: any;
     const disableLoading = (
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       messages: any[],
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       setState: React.Dispatch<React.SetStateAction<any>>
     ) => {
       let defaultDisableTime = 750;
@@ -49,7 +54,7 @@ const ChatbotMessage = ({
 
           return message;
         });
-
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         setState((state: any) => ({...state, messages: newMessages}));
       }, defaultDisableTime);
     };

@@ -19,16 +19,20 @@ import { IMessage } from '../../interfaces/IMessages';
 import { createChatBotMessage } from '../..';
 
 interface IChatbotProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   actionProvider: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   messageParser: any;
   config: IConfig;
   headerText?: string;
   placeholderText?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   saveMessages?: (messages: IMessage[], html: string) => any;
   messageHistory?: IMessage[] | string;
-  validator?: (input: string) => Boolean;
-  runInitialMessagesWithHistory?: Boolean;
+  validator?: (input: string) => boolean;
+  runInitialMessagesWithHistory?: boolean;
   disableScrollToBottom?: boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   chatbot?: any;
   emotionDetection?: string;
   setEmotionDetection?: (value: string) => void;

@@ -64,7 +64,7 @@ class Chatbot {
 			question: string
 			chatHistory: Array<BaseMessage> | null
 		}): Promise<{ result: string }> => {
-			let question = input.question
+			const question = input.question
 			// Serialize chat history into strings
 			const chatHistoryString = input.chatHistory
 				? serializeChatHistory(input.chatHistory)

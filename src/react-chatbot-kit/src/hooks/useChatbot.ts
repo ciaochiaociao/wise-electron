@@ -17,11 +17,14 @@ import IWidget from '../interfaces/IWidget';
 
 interface IUseChatbotParams {
   config: IConfig | null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   actionProvider: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   messageParser: any;
   messageHistory?: IMessage[] | string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   saveMessages?: (messages: IMessage[], html: string) => any | null;
-  runInitialMessagesWithHistory?: Boolean;
+  runInitialMessagesWithHistory?: boolean;
 }
 
 const useChatbot = ({
@@ -78,6 +81,7 @@ const useChatbot = ({
 
   useEffect(() => {
     if (messageHistory && Array.isArray(messageHistory)) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       setState((prevState: any) => ({
         ...prevState,
         messages: messageHistory,

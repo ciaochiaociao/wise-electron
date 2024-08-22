@@ -6,6 +6,7 @@ import type { Actions } from './ActionProvider';
 
 interface ChildProps {
   parse: (message: string) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   actions: any; // Replace 'any' with a more specific type if possible
 }
 

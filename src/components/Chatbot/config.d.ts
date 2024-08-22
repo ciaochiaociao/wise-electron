@@ -3,6 +3,7 @@ interface ChatBotMessage {
   loading: boolean;
   widget?: string;
   delay?: number;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   payload?: any;
   message: string;
   type: string;
