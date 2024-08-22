@@ -96,7 +96,7 @@ const ActionProvider: React.FC<ActionProviderProps> = ({ createChatBotMessage, s
   };
 
   return (
-    <div>
+    <>
       {React.Children.map(children, (child) => {
         if (React.isValidElement<ChildProps>(child)) {
           return React.cloneElement(child as React.ReactElement<ChildProps>, {
@@ -110,7 +110,7 @@ const ActionProvider: React.FC<ActionProviderProps> = ({ createChatBotMessage, s
           return child;
         }
       })}
-    </div>
+    </>
   );
 };
 

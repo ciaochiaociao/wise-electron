@@ -5,6 +5,7 @@ import ActionProvider from './ActionProvider'
 
 import Chatbot from '../../react-chatbot-kit/src/components/Chatbot/Chatbot'
 import '../../react-chatbot-kit/src/main.css'
+import './Chatbot.css'
 import chatbot from '../../processes/Chatbot'
 
 import { useRef, useEffect, useState } from 'react'

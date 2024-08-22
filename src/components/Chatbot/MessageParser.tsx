@@ -61,7 +61,7 @@ const MessageParser = ({ children, actions, emotionDetection, setEmotionDetectio
   };
 
   return (
-    <div>
+    <>
       {React.Children.map(children, (child) => {
         if (React.isValidElement<ChildProps>(child)) {
           return React.cloneElement(child as React.ReactElement<ChildProps>, {
@@ -72,7 +72,7 @@ const MessageParser = ({ children, actions, emotionDetection, setEmotionDetectio
           return child;
         }
       })}
-    </div>
+    </>
   );
 };
 
