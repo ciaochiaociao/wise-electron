@@ -4,22 +4,34 @@
 
 .react-chatbot-kit-chat-inner-container {
   width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .react-chatbot-kit-chat-header {
   display: none; /* invisible */
 }
 
+.react-chatbot-kit-chat-message-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  height: unset;
+  flex-grow: 1;
+}
+.react-chatbot-kit-chat-input-container {
+  position: unset;
+}
 .react-chatbot-kit-chat-bot-message {
   /* set back to default */
-  margin: 0 0;
-}
-/*
-.react-chatbot-kit-chat-input-container {
+  margin: unset;
 }
 
-.react-chatbot-kit-chat-message-container {
+.react-chatbot-kit-user-chat-message {
+  overflow-wrap: anywhere;
 }
+/*
+
 
 .react-chatbot-kit-chat-input {
 }
