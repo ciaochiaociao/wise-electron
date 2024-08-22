@@ -20,7 +20,7 @@
     "react-chartjs-2": "^5.2.0",
     "react-conditionally-render": "^1.0.2",
     "react-dom": "^18.2.0",
-    "recharts": "^2.12.7"
+    "recharts": "^2.13.0-alpha.4"
   },
   "devDependencies": {
     "@types/electron": "^1.6.10",
