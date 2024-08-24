@@ -1,5 +1,5 @@
 interface EmotionRecord {
-  emotion: string
+  emotion: number
   confidence: number
   created_at: string
 }
