@@ -1,8 +1,9 @@
-import { app, BrowserWindow, ipcMain } from 'electron'
+import { app, session, BrowserWindow, ipcMain } from 'electron'
 import { createRequire } from 'node:module'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
 import net from 'node:net'
+import os from 'node:os'
 
 
 const require = createRequire(import.meta.url)
@@ -64,11 +65,19 @@ function createWindow() {
 
   // Test active push message to Renderer-process.
   win.webContents.on('did-finish-load', () => {
-    win?.webContents.send('main-process-message', (new Date).toLocaleString())
+    win!.webContents.send('main-process-message', (new Date).toLocaleString())
   })
 
   if (VITE_DEV_SERVER_URL) {
-    win.loadURL(VITE_DEV_SERVER_URL)
+    const reactDevToolsPath = path.join(
+      os.homedir(),
+      '\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extensions\\fmkadmapgofadopljbjfkapdkoienihi\\5.3.1_0'
+    )
+    console.log('VITE_DEV_SERVER_URL ' + VITE_DEV_SERVER_URL)
+    session.defaultSession.loadExtension(reactDevToolsPath).then(() => {
+      console.log('React DevTools loaded...')
+      win!.loadURL(VITE_DEV_SERVER_URL)
+    })
   } else {
     // win.loadFile('dist/index.html')
     win.loadFile(path.join(RENDERER_DIST, 'index.html'))
@@ -102,3 +111,5 @@ app.on('activate', () => {
 })
 
 app.whenReady().then(createWindow)
+// app.whenReady().then(
+// )
