@@ -96,6 +96,7 @@ const Chatbot = ({
       chatbot.addAIMessageToChatHistory(botMessageStr)
       console.log("Added message to chat history")
       setEmotionDetection("asking")
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       setState((prev: any) => ({
         ...prev,
         messages: [

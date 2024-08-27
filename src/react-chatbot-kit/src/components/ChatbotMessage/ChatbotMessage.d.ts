@@ -5,9 +5,11 @@ interface IChatbotMessageProps {
     message: string;
     withAvatar?: boolean;
     loading?: boolean;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     messages: any[];
     delay?: number;
     id: number;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     setState?: React.Dispatch<React.SetStateAction<any>>;
     customComponents?: ICustomComponents;
     customStyles: {
