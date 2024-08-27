@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import fetchEmotionRecords from '../services/fetchData';
-interface EmotionRecord {
-  emotion: number
-  confidence: number
-  created_at: string
-}
+import { EmotionrecordsApi, Configuration, AggregateApi } from '../services';
+import { EmotionRecord, EmotionRecordAggregate } from '../services';
+
+const config = new Configuration({
+  basePath: 'http://localhost:8000',
+})
+const aggApi = new AggregateApi(config)
+// interface EmotionAggRecord {
+//   emotion__name: string
+//   result: number
+// }
 
 interface EmotionData {
   name: string
@@ -16,51 +21,62 @@ interface EmotionData {
 const emotionDict = {
   1: ['Happy', '#FFD700'],
   2: ['Sad', '#4169E1'],
-  3: ['Angry', '#FF6347'],
-  4: ['Surprised', '#8A2BE2'],
-  5: ['Disgusted', '#32CD32'],
-  6: ['Fearful', '#FF4500'],
+  3: ['Anger', '#FF6347'],
+  4: ['Surprise', '#8A2BE2'],
+  5: ['Disgust', '#32CD32'],
+  6: ['Fear', '#FF4500'],
   7: ['Neutral', '#A9A9A9'],
+  8: ['Contempt', '#FFA07A'],
 }
 
-function getEmotionName(emotion: number): string {
+const emotionColor = {}
+for (const key in emotionDict) {
+  emotionColor[emotionDict[key][0]] = emotionDict[key][1]
+}
+
+function getEmotionNameFromId(emotion: number): string {
   if (emotion in emotionDict) return emotionDict[emotion][0]
   return 'Unknown'
 }
 
-function getEmotionColor(emotion: number): string {
-  if (emotion in emotionDict) return emotionDict[emotion][1]
+function getEmotionColorFromName(emotion: string): string {
+  if (emotion in emotionColor) return emotionColor[emotion]
   return '#000000'
 }
 
 
-function convertData(data: EmotionRecord[]): EmotionData[] {
-  const emotionData: EmotionData[] = [];
+function convertData(data: EmotionRecordAggregate[]): EmotionData[] {
+  const emotionData: EmotionData[] = []
   for (let i = 0; i < data.length; i++) {
-    const name = getEmotionName(data[i].emotion);
-    const color = getEmotionColor(data[i].emotion);
-    const value = data[i].confidence;
-    // const created_at = data[i].created_at;
-    emotionData.push({ name, value, color });
+    const name = data[i].emotionName
+    const color = getEmotionColorFromName(name)
+    const value = data[i].result
+    // const created_at = data[i].created_at
+    emotionData.push({ name, value, color })
   }
-
   return emotionData;
 }
+async function getEmotionData(params) {
+  const emotionrecords = await aggApi.aggregateList(params)
+  if (!emotionrecords) return []
+  const emotionData = convertData(emotionrecords)
+  return emotionData
+}
+const EmotionDashboard = () => {
+  const [overallMood, setOverallMood] = useState(50)
+  const [selectedDuration, setSelectedDuration] = useState('month')
+  const [emotionData, setEmotionData] = useState<EmotionData[]>([])
 
-const EmotionDashboard = async () => {
-  const [overallMood, setOverallMood] = useState(50);
-  const [selectedDuration, setSelectedDuration] = useState('day');
 
-
-  let emotionData = [
-    { name: 'Happy', value: 30, color: '#FFD700' },
-    { name: 'Sad', value: 15, color: '#4169E1' },
-    { name: 'Angry', value: 10, color: '#FF6347' },
-    { name: 'Surprised', value: 25, color: '#8A2BE2' },
-    { name: 'Disgusted', value: 20, color: '#32CD32' },
-    { name: 'Fearful', value: 10, color: '#FF4500' },
-    { name: 'Neutral', value: 10, color: '#A9A9A9' },
-  ];
+  // let emotionData = [
+  //   { name: 'Happy', value: 30, color: '#FFD700' },
+  //   { name: 'Sad', value: 15, color: '#4169E1' },
+  //   { name: 'Angry', value: 10, color: '#FF6347' },
+  //   { name: 'Surprised', value: 25, color: '#8A2BE2' },
+  //   { name: 'Disgusted', value: 20, color: '#32CD32' },
+  //   { name: 'Fearful', value: 10, color: '#FF4500' },
+  //   { name: 'Neutral', value: 10, color: '#A9A9A9' },
+  // ];
 
   // const intensityData = [
   //   { name: 'Happy', intensity: 8 },
@@ -72,25 +88,29 @@ const EmotionDashboard = async () => {
   //   { name: 'Neutral', intensity: 3 },
   // ];
 
-  if (selectedDuration === 'day') {
-    console.log('Day selected')
-    const data = await fetchEmotionRecords()
-    
-    if (!data) return null
-    else {
-      emotionData = convertData(data)
+  useEffect(() => {
+    const date = new Date();
+    if (selectedDuration === 'day') {
+      console.log('Day selected')
+      date.setDate(date.getDate() - 1)
+    } else if (selectedDuration === 'week') {
+      console.log('Week selected')
+      date.setDate(date.getDate() - 7)
     }
-    console.log(JSON.stringify(emotionData[0]))
-  } else if (selectedDuration === 'week') {
-    console.log('Week selected')
+    else if (selectedDuration === 'month') {
+      console.log('Month selected')
+      date.setMonth(date.getMonth() - 1)
+    }
+    getEmotionData({ createdAtDateGt: date, func: 'count' }).then(data => {
+      setEmotionData(data)
+      console.log("Emotion Data: ")
+      console.log(JSON.stringify(data))
+    })
+  }, [selectedDuration])
 
-  }
-  else if (selectedDuration === 'month') {
-    console.log('Month selected')
-  }
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
+    <div className="mx-auto p-4 w-full">
       <div className="mb-4">
         <select
           id="duration"
@@ -104,7 +124,7 @@ const EmotionDashboard = async () => {
         </select>
       </div>
       <div className="flex flex-col md:flex-row justify-between mb-8">
-        <div className="w-full md:w-[45%] h-80 mb-4 md:mb-0">
+        <div className="w-full h-80 mb-4 md:mb-0">
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie
