@@ -29,7 +29,7 @@ function App() {
           </ul>
         </Sidebar>
         {activePage === 'MyChatbot' && <ErrorBoundary><MyChatbot /></ErrorBoundary>}
-        {activePage === 'ChartPage' && <EmotionDashboard />}
+        {activePage === 'ChartPage' && <ErrorBoundary><EmotionDashboard /></ErrorBoundary>}
       </SidebarContainer>
       
     </>
