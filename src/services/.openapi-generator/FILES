@@ -1,0 +1,9 @@
+apis/AggregateApi.ts
+apis/EmotionrecordsApi.ts
+apis/index.ts
+index.ts
+models/EmotionRecord.ts
+models/EmotionRecordAggregate.ts
+models/PatchedEmotionRecord.ts
+models/index.ts
+runtime.ts
