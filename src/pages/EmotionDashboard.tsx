@@ -111,55 +111,56 @@ const EmotionDashboard = () => {
 
   return (
     <div className="mx-auto p-4 w-full">
-      <div className="mb-4">
-        <select
-          id="duration"
-          value={selectedDuration}
-          onChange={(e) => setSelectedDuration(e.target.value)}
-          className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
-        >
-          <option value="day">Day</option>
-          <option value="week">Week</option>
-          <option value="month">Month</option>
-        </select>
-      </div>
-      <div className="flex flex-col md:flex-row justify-between mb-8">
-        <div className="w-full h-80 mb-4 md:mb-0">
-          <ResponsiveContainer width="100%" height="100%">
-            <PieChart>
-              <Pie
-                data={emotionData}
-                cx="50%"
-                cy="50%"
-                labelLine={false}
-                outerRadius="80%"
-                fill="#8884d8"
-                dataKey="value"
-                label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-              >
-                {emotionData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={entry.color} />
-                ))}
-              </Pie>
-              <Tooltip />
-              <Legend />
-            </PieChart>
-          </ResponsiveContainer>
+      <>
+        <div className="mb-4">
+          <select
+            id="duration"
+            value={selectedDuration}
+            onChange={(e) => setSelectedDuration(e.target.value)}
+            className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+          >
+            <option value="day">Day</option>
+            <option value="week">Week</option>
+            <option value="month">Month</option>
+          </select>
         </div>
-        {/* <div className="w-full md:w-[45%] h-80">
-          <h2 className="text-xl font-semibold mb-2">Emotion Intensity</h2>
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={intensityData}>
-              <XAxis dataKey="name" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Bar dataKey="intensity" fill="#8884d8" />
-            </BarChart>
-          </ResponsiveContainer>
-        </div> */}
-      </div>
-      
+        <div className="flex flex-col md:flex-row justify-between mb-8">
+          <div className="w-full h-80 mb-4 md:mb-0">
+            <ResponsiveContainer width="100%" height="100%">
+              <PieChart>
+                <Pie
+                  data={emotionData}
+                  cx="50%"
+                  cy="50%"
+                  labelLine={false}
+                  outerRadius="80%"
+                  fill="#8884d8"
+                  dataKey="value"
+                  label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                >
+                  {emotionData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.color} />
+                  ))}
+                </Pie>
+                <Tooltip />
+                <Legend />
+              </PieChart>
+            </ResponsiveContainer>
+          </div>
+          {/* <div className="w-full md:w-[45%] h-80">
+            <h2 className="text-xl font-semibold mb-2">Emotion Intensity</h2>
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={intensityData}>
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="intensity" fill="#8884d8" />
+              </BarChart>
+            </ResponsiveContainer>
+          </div> */}
+        </div>
+      </>
       <div>
         <h2 className="text-xl font-semibold mb-2">Overall Mood</h2>
         <input 
