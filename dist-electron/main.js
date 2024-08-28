@@ -1,8 +1,9 @@
-import { app, BrowserWindow, ipcMain } from "electron";
+import { app, BrowserWindow, ipcMain, session } from "electron";
 import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import net from "node:net";
+import os from "node:os";
 const require2 = createRequire(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const brightness = require2("brightness");
@@ -39,10 +40,18 @@ function createWindow() {
     return Math.random() < 0.5 ? "bad" : "not bad";
   });
   win.webContents.on("did-finish-load", () => {
-    win == null ? void 0 : win.webContents.send("main-process-message", (/* @__PURE__ */ new Date()).toLocaleString());
+    win.webContents.send("main-process-message", (/* @__PURE__ */ new Date()).toLocaleString());
   });
   if (VITE_DEV_SERVER_URL) {
-    win.loadURL(VITE_DEV_SERVER_URL);
+    const reactDevToolsPath = path.join(
+      os.homedir(),
+      "\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extensions\\fmkadmapgofadopljbjfkapdkoienihi\\5.3.1_0"
+    );
+    console.log("VITE_DEV_SERVER_URL " + VITE_DEV_SERVER_URL);
+    session.defaultSession.loadExtension(reactDevToolsPath).then(() => {
+      console.log("React DevTools loaded...");
+      win.loadURL(VITE_DEV_SERVER_URL);
+    });
   } else {
     win.loadFile(path.join(RENDERER_DIST, "index.html"));
   }
