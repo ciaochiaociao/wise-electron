@@ -16,16 +16,6 @@ import { useRef, useEffect, useState } from 'react'
 //   current: "detecting" | "not bad" | "bad" | "boosting mood" | "boosted mood"
 // }
 
-declare global {
-  interface Window {
-    hmx: Hmx
-  }
-
-  type Hmx = {
-    getEmotion: () => Promise<string>
-  }
-}
-
 
 export const MyChatbot = () => {
   const [emotionDetection, setEmotionDetection] = useState<string>("detecting")

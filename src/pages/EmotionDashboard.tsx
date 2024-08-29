@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { EmotionrecordsApi, Configuration, AggregateApi } from '../services';
 import { EmotionRecord, EmotionRecordAggregate } from '../services';
+import RealTimeMeter from '../components/RealTimeMeter/RealTimeMeter';
 
 const config = new Configuration({
   basePath: 'http://localhost:8000',
@@ -161,6 +162,7 @@ const EmotionDashboard = () => {
           </div> */}
         </div>
       </>
+      <RealTimeMeter />
       <div>
         <h2 className="text-xl font-semibold mb-2">Overall Mood</h2>
         <input 
