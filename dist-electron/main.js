@@ -2,21 +2,10 @@ import { app, BrowserWindow, ipcMain, session } from "electron";
 import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
-import net from "node:net";
 import os from "node:os";
 const require2 = createRequire(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const brightness = require2("brightness");
-const PIPE_PATH = "\\\\.\\pipe\\hmx_pipe";
-const client = net.createConnection(PIPE_PATH, () => {
-  console.log("Connected to server");
-});
-client.on("data", (data) => {
-  console.log("Received from server:", data.toString());
-});
-client.on("end", () => {
-  console.log("Disconnected from server");
-});
 process.env.APP_ROOT = path.join(__dirname, "..");
 const VITE_DEV_SERVER_URL = process.env["VITE_DEV_SERVER_URL"];
 const MAIN_DIST = path.join(process.env.APP_ROOT, "dist-electron");
