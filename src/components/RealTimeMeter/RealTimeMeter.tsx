@@ -1,14 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 const emotionMap = {
-  1: { name: 'Happy', value: 0.75 },
-  2: { name: 'Sad', value: 0.25 },
-  3: { name: 'Anger', value: 0 },
-  4: { name: 'Surprise', value: 0.5 },
-  5: { name: 'Disgust', value: 0.1 },
-  6: { name: 'Fear', value: 0.15 },
-  7: { name: 'Neutral', value: 0.5 },
-  8: { name: 'Contempt', value: 0.2 },
+  1: { name: 'Anger', value: 0 },
+  2: { name: 'Contempt', value: 0.2 },
+  3: { name: 'Disgust', value: 0.1 },
+  4: { name: 'Fear', value: 0.15 },
+  5: { name: 'Happy', value: 0.75 },
+  6: { name: 'Neutral', value: 0.5 },
+  7: { name: 'Sad', value: 0.25 },
+  8: { name: 'Surprise', value: 0.5 },
 };
 
 interface EmotionData {
@@ -36,10 +36,7 @@ const RealTimeMeter = () => {
     };
 
     socketRef.current.onmessage = (event) => {
-      // console.log(event.data);
-      // console.log(typeof );
       const data: EmotionData = JSON.parse(event.data.replace(/'/g, '"'));
-      console.log('Received data:', data);
 
       const emotionInfo = emotionMap[data.emotion];
       if (emotionInfo) {

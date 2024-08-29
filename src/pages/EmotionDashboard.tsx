@@ -20,14 +20,14 @@ interface EmotionData {
 }
 
 const emotionDict = {
-  1: ['Happy', '#FFD700'],
-  2: ['Sad', '#4169E1'],
-  3: ['Anger', '#FF6347'],
-  4: ['Surprise', '#8A2BE2'],
-  5: ['Disgust', '#32CD32'],
-  6: ['Fear', '#FF4500'],
-  7: ['Neutral', '#A9A9A9'],
-  8: ['Contempt', '#FFA07A'],
+  1: ['Anger', '#FF6347'],
+  2: ['Contempt', '#FFA07A'],
+  3: ['Disgust', '#32CD32'],
+  4: ['Fear', '#FF4500'],
+  5: ['Happy', '#FFD700'],
+  6: ['Neutral', '#A9A9A9'],
+  7: ['Sad', '#4169E1'],
+  8: ['Surprise', '#8A2BE2'],
 }
 
 const emotionColor = {}
