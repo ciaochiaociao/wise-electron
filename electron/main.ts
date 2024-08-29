@@ -11,18 +11,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 const brightness = require('brightness')
 
-const PIPE_PATH = '\\\\.\\pipe\\hmx_pipe';
-const client = net.createConnection(PIPE_PATH, () => {
-  console.log('Connected to server')
-});
 
-client.on('data', (data) => {
-  console.log('Received from server:', data.toString())
-});
-
-client.on('end', () => {
-  console.log('Disconnected from server')
-});
 
 // The built directory structure
 //
@@ -44,7 +33,6 @@ process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL ? path.join(process.env.APP_ROOT, 
 console.log(process.versions)
 
 let win: BrowserWindow | null
-
 function createWindow() {
   win = new BrowserWindow({
     icon: path.join(process.env.VITE_PUBLIC, 'electron-vite.svg'),

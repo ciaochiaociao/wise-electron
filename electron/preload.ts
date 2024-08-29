@@ -30,9 +30,3 @@ contextBridge.exposeInMainWorld('systemControls', {
     ipcRenderer.send('set-brightness', value);
   },
 })
-
-contextBridge.exposeInMainWorld('hmx', {
-  getEmotion: async () => {
-    return await ipcRenderer.invoke('get-emotion')
-  },
-})
