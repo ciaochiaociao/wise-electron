@@ -5,3 +5,9 @@
 $ yarn
 $ yarn dev
 ```
+
+## Build
+```bash
+$ yarn
+$ yarn build
+```
