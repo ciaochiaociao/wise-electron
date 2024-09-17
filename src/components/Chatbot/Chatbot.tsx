@@ -21,6 +21,14 @@ export const MyChatbot = () => {
   const [emotionDetection, setEmotionDetection] = useState<string>("detecting")
   const emotionInterval = useRef<number | null>(null)
 
+  const saveMessages = (messages: any, HTMLString: string) => {
+    localStorage.setItem('chat_messages', JSON.stringify(messages))
+  }
+
+  const loadMessages = () => {
+    return JSON.parse(localStorage.getItem('chat_messages') || '[]')
+  }
+
   // set up interval for emotion detection
   useEffect(() => {
     if (emotionDetection === "detecting") {
@@ -56,6 +64,8 @@ export const MyChatbot = () => {
         chatbot={chatbot}
         emotionDetection={emotionDetection}
         setEmotionDetection={setEmotionDetection}
+        messageHistory={loadMessages()}
+        saveMessages={saveMessages}
       />
     </>
   );
