@@ -23,7 +23,7 @@ const ConfigPage: React.FC<ConfigPageProps> = ({
       <h2 className="text-2xl font-bold mb-4">Configuration</h2>
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <span className="text-lg">Emotion Detection</span>
+          <span className="text-lg">Automatic Emotion Boosting</span>
           <Switch
             checked={emotionDetectionEnabled}
             onChange={setEmotionDetectionEnabled}
