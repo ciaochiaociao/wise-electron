@@ -2,7 +2,7 @@ import React from 'react'
 import type { Actions } from './ActionProvider';
 // import Chat from '../../react-chatbot-kit/src/components/Chat/Chat'
 
-function textParser(input: string): { type: string; value?: number | null } {
+function parseCommand(input: string): { type: string; value?: number | null } {
   const brightnessRegex = /Set the brightness to (\d*\.?\d*%?)/i;
   const brightnessMatch = input.match(brightnessRegex);
 
@@ -40,7 +40,7 @@ const MessageParser = ({ children, actions, emotionDetection, setEmotionDetectio
       return;
     }
 
-    const parsedMessage = textParser(message);
+    const parsedMessage = parseCommand(message);
 
     switch (parsedMessage.type) {
       case 'setBrightness':
