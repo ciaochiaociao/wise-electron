@@ -8,7 +8,6 @@ import '../../react-chatbot-kit/src/main.css'
 import './Chatbot.css'
 import chatbot from '../../processes/Chatbot'
 
-import { useRef, useEffect, useState } from 'react'
 
 
 
@@ -17,9 +16,7 @@ import { useRef, useEffect, useState } from 'react'
 // }
 
 
-export const MyChatbot = () => {
-  const [emotionDetection, setEmotionDetection] = useState<string>("detecting")
-  const emotionInterval = useRef<number | null>(null)
+export const MyChatbot = ({emotionDetection, setEmotionDetection}: {emotionDetection: string, setEmotionDetection: (emotion: string) => void}) => {
 
   const saveMessages = (messages: any, HTMLString: string) => {
     localStorage.setItem('chat_messages', JSON.stringify(messages))
@@ -27,31 +24,8 @@ export const MyChatbot = () => {
 
   const loadMessages = () => {
     return JSON.parse(localStorage.getItem('chat_messages') || '[]')
+    // return []
   }
-
-  // set up interval for emotion detection
-  useEffect(() => {
-    if (emotionDetection === "detecting") {
-      emotionInterval.current = window.setInterval(async () => {
-        console.log(window.hmx.getEmotion())
-        const emotion = await window.hmx.getEmotion()
-        if (emotion === "bad") {
-          console.log("Bad mood detected!")
-          setEmotionDetection("bad")
-        }
-      }, 3000)
-      console.log("Emotion interval started")
-      return () => {
-        if (emotionInterval.current != null) {
-          clearInterval(emotionInterval.current)
-          console.log("Emotion interval cleared")
-        }
-      }
-    }
-  }, [emotionDetection])
-
-
-  // alert(emotionDetection)
 
   return (
     <>

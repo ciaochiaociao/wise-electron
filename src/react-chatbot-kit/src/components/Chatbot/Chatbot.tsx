@@ -110,7 +110,8 @@ const Chatbot = ({
   }, [])
 
   useEffect(() => {
-    if (emotionDetection == "bad") {
+    console.log("emotionDetection changed:", emotionDetection)
+    if (emotionDetection === "bad") {
       console.log("Bad emotion detected!") // Test emotion detection
       // todo: add emotion detection
       const botMessageStr = "Bad mood detected! Do you want to boost your mood?"
