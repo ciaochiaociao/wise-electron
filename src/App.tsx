@@ -68,7 +68,7 @@ function App() {
   }, []);
 
   return (
-    <>
+    <div className="app-container">
       <TitleBar />
       <SidebarContainer>
         <Sidebar>
@@ -84,7 +84,7 @@ function App() {
           </ErrorBoundary>}
         {activePage === 'ChartPage' && <ErrorBoundary><EmotionDashboard /></ErrorBoundary>}
       </SidebarContainer>
-    </>
+    </div>
   )
 }
 
