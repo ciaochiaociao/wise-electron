@@ -16,6 +16,8 @@
     "langchain": "^0.2.8",
     "mmap-io": "^1.1.7",
     "nircmd": "^2.0.0",
+    "node-audiorecorder": "^3.0.0",
+    "openai": "^4.61.1",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-conditionally-render": "^1.0.2",

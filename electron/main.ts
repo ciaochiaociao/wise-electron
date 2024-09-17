@@ -4,7 +4,8 @@ import { fileURLToPath } from 'node:url'
 import path from 'node:path'
 import net from 'node:net'
 import os from 'node:os'
-
+import { startListening } from './audioProcessor'
+console.log("main.ts")
 
 const require = createRequire(import.meta.url)
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -55,6 +56,19 @@ function createWindow() {
   win.webContents.on('did-finish-load', () => {
     win!.webContents.send('main-process-message', (new Date).toLocaleString())
   })
+
+  startListening(async (transcription) => {
+    console.log("transcription: " + transcription)
+    if (transcription.toLowerCase().includes('hello')) {
+      console.log("key word detected, show window")
+      win!.show()
+      win!.focus()
+    }
+  }).catch(error => {
+    console.error("Error in startListening:", error);
+  });
+
+  console.log("after setting up keyword listener")
 
   if (VITE_DEV_SERVER_URL) {
     const reactDevToolsPath = path.join(

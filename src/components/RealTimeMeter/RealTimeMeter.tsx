@@ -41,7 +41,7 @@ const RealTimeMeter = () => {
       const emotionInfo = emotionMap[data.emotion];
       if (emotionInfo) {
         const adjustedValue = emotionInfo.value * data.score;
-        console.log(adjustedValue);
+        // console.log(adjustedValue);
         setEmotionValue(adjustedValue);
       }
     };
