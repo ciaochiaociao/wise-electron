@@ -131,6 +131,21 @@ const Chatbot = ({
     }
   }, [emotionDetection])
 
+  useEffect(() => {
+    const clearMessages = () => {
+      localStorage.removeItem('chat_messages') // Adjust this key if you're using a different one
+      setState((prev) => ({ ...prev, messages: [] }))
+      console.log("Cleared chat messages")
+      window.ipcRenderer.send('chat-messages-cleared')
+    };
+
+    window.ipcRenderer.on('clear-chat-messages', clearMessages)
+
+    return () => {
+      window.ipcRenderer.off('clear-chat-messages', clearMessages)
+    }
+  }, [])
+
   if (isConstructor(ActionProvider) && isConstructor(MessageParser)) {
     return (
       <Chat

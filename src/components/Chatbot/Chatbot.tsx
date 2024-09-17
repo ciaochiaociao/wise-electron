@@ -23,6 +23,8 @@ export const MyChatbot = ({emotionDetection, setEmotionDetection}: {emotionDetec
   }
 
   const loadMessages = () => {
+    console.log("Loading messages ...")
+    console.log(localStorage.getItem('chat_messages'))
     return JSON.parse(localStorage.getItem('chat_messages') || '[]')
     // return []
   }
