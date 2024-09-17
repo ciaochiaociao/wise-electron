@@ -23,6 +23,13 @@ function App() {
   const [emotionDetection, setEmotionDetection] = useState<string>("detecting")
   const emotionInterval = useRef<number | null>(null)
 
+  useEffect(() => {
+    if (activePage === "ChartPage") {
+      console.log("emotionDetection changed: detecting")
+      setEmotionDetection("detecting")
+    }
+  }, [activePage])
+
   // set up interval for emotion detection
   useEffect(() => {
     if (emotionDetection === "detecting") {
@@ -33,6 +40,7 @@ function App() {
           console.log("Bad mood detected!")
           setActivePage("MyChatbot")
           setEmotionDetection("bad")
+          console.log("emotionDetection changed: bad")
         }
       }, 3000)
       console.log("Emotion interval started")

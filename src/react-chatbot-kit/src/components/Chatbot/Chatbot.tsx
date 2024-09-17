@@ -126,6 +126,7 @@ const Chatbot = ({
           createChatBotMessage(botMessageStr, null)
         ]
       }))
+      console.log("State updated")
 
     }
   }, [emotionDetection])
