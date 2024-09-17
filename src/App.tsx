@@ -24,8 +24,9 @@ import SettingsIcon from './assets/settings.svg?react'
 
 function App() {
   const [activePage, setActivePage] = useState('ChartPage');
-  const [emotionDetection, setEmotionDetection] = useState<string>("detecting")
+  const [emotionDetection, setEmotionDetection] = useState<string>("detecting");
   const [emotionDetectionEnabled, setEmotionDetectionEnabled] = useState(true);
+  const [keywordAwakeningEnabled, setKeywordAwakeningEnabled] = useState(true);
   const emotionInterval = useRef<number | null>(null)
 
   useEffect(() => {
@@ -61,14 +62,18 @@ function App() {
 
   useEffect(() => {
     const handleKeywordDetected = () => {
-      console.log("keyword detected")
-      setActivePage('MyChatbot')
+      if (keywordAwakeningEnabled) {
+        console.log("keyword detected")
+        setActivePage('MyChatbot')
+        window.ipcRenderer.send('bring-to-foreground')
+      }
     }
     window.ipcRenderer.on('keyword-detected', handleKeywordDetected)
     return () => {
       window.ipcRenderer.off('keyword-detected', handleKeywordDetected)
     }
-  }, []);
+  }, [keywordAwakeningEnabled])
+
 
   return (
     <div className="app-container">
@@ -97,6 +102,8 @@ function App() {
           <ConfigPage 
             emotionDetectionEnabled={emotionDetectionEnabled}
             setEmotionDetectionEnabled={setEmotionDetectionEnabled}
+            keywordAwakeningEnabled={keywordAwakeningEnabled}
+            setKeywordAwakeningEnabled={setKeywordAwakeningEnabled}
           />
         </ErrorBoundary>}
       </SidebarContainer>
