@@ -46,3 +46,8 @@
   height: 100vh;
   overflow-y: auto;
 }
+
+.sidebar {
+  /* width: px; */
+  background-color: rgb(46, 46, 46);
+}

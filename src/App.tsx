@@ -9,6 +9,8 @@ import BubbleIcon from './assets/chat-bubble.svg?react'
 import PieIcon from './assets/pie.svg?react'
 import React from 'react'
 import TitleBar from './components/TitleBar/TitleBar'
+import ConfigPage from './pages/ConfigPage'
+import SettingsIcon from './assets/settings.svg?react'
 // window.addEventListener("storage", () => {
 //   console.log("Storage event")
 //   const boostMood = localStorage.getItem("boostMood")
@@ -23,6 +25,7 @@ import TitleBar from './components/TitleBar/TitleBar'
 function App() {
   const [activePage, setActivePage] = useState('ChartPage');
   const [emotionDetection, setEmotionDetection] = useState<string>("detecting")
+  const [emotionDetectionEnabled, setEmotionDetectionEnabled] = useState(true);
   const emotionInterval = useRef<number | null>(null)
 
   useEffect(() => {
@@ -34,7 +37,7 @@ function App() {
 
   // set up interval for emotion detection
   useEffect(() => {
-    if (emotionDetection === "detecting") {
+    if (emotionDetection === "detecting" && emotionDetectionEnabled) {
       emotionInterval.current = window.setInterval(async () => {
         console.log(window.hmx.getEmotion())
         const emotion = await window.hmx.getEmotion()
@@ -53,7 +56,7 @@ function App() {
         }
       }
     }
-  }, [emotionDetection])
+  }, [emotionDetection, emotionDetectionEnabled])
 
 
   useEffect(() => {
@@ -75,6 +78,7 @@ function App() {
           <ul className='list-none p-0'>
             <li className='cursor-pointer p-2 hover:bg-gray-700 text-white' onClick={() => setActivePage('MyChatbot')}><BubbleIcon className='w-7 m-auto'/></li>
             <li className='cursor-pointer p-2 hover:bg-gray-700 text-white' onClick={() => setActivePage('ChartPage')}><PieIcon className='w-7 m-auto'/></li>
+            <li className='cursor-pointer p-2 hover:bg-gray-700 text-white' onClick={() => setActivePage('ConfigPage')}><SettingsIcon className='w-6 m-auto'/></li>
           </ul>
         </Sidebar>
         {activePage === 'MyChatbot' && <ErrorBoundary>
@@ -83,6 +87,12 @@ function App() {
             setEmotionDetection={setEmotionDetection} />
           </ErrorBoundary>}
         {activePage === 'ChartPage' && <ErrorBoundary><EmotionDashboard /></ErrorBoundary>}
+        {activePage === 'ConfigPage' && <ErrorBoundary>
+          <ConfigPage 
+            emotionDetectionEnabled={emotionDetectionEnabled}
+            setEmotionDetectionEnabled={setEmotionDetectionEnabled}
+          />
+        </ErrorBoundary>}
       </SidebarContainer>
     </div>
   )

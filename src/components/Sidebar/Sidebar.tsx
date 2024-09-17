@@ -4,8 +4,8 @@ const Sidebar = ({ children } : {  children: ReactNode }) => {
 
   return (
     
-    <div className='w-11'>
-      <div className="sidebar fixed h-full shadow-md bg-neutral-800 text-white">
+    <div className='w-16'>
+      <div className="sidebar fixed h-full shadow-md text-white">
         {children}
       </div>
     </div>
