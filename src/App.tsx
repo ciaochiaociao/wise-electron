@@ -27,6 +27,7 @@ function App() {
   const [emotionDetection, setEmotionDetection] = useState<string>("detecting");
   const [emotionDetectionEnabled, setEmotionDetectionEnabled] = useState(true);
   const [keywordAwakeningEnabled, setKeywordAwakeningEnabled] = useState(true);
+  const [focusDetectionEnabled, setFocusDetectionEnabled] = useState(false);
   const emotionInterval = useRef<number | null>(null)
 
   useEffect(() => {
@@ -104,6 +105,8 @@ function App() {
             setEmotionDetectionEnabled={setEmotionDetectionEnabled}
             keywordAwakeningEnabled={keywordAwakeningEnabled}
             setKeywordAwakeningEnabled={setKeywordAwakeningEnabled}
+            focusDetectionEnabled={focusDetectionEnabled}
+            setFocusDetectionEnabled={setFocusDetectionEnabled}
           />
         </ErrorBoundary>}
       </SidebarContainer>
