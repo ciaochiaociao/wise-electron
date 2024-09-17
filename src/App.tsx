@@ -7,6 +7,8 @@ import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary'
 import { useRef, useEffect, useState } from 'react'
 import BubbleIcon from './assets/chat-bubble.svg?react'
 import PieIcon from './assets/pie.svg?react'
+import React from 'react'
+import TitleBar from './components/TitleBar/TitleBar'
 // window.addEventListener("storage", () => {
 //   console.log("Storage event")
 //   const boostMood = localStorage.getItem("boostMood")
@@ -67,6 +69,7 @@ function App() {
 
   return (
     <>
+      <TitleBar />
       <SidebarContainer>
         <Sidebar>
           <ul className='list-none p-0'>
@@ -81,7 +84,6 @@ function App() {
           </ErrorBoundary>}
         {activePage === 'ChartPage' && <ErrorBoundary><EmotionDashboard /></ErrorBoundary>}
       </SidebarContainer>
-      
     </>
   )
 }

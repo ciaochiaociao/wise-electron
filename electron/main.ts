@@ -1,4 +1,4 @@
-import { app, session, BrowserWindow, ipcMain } from 'electron'
+import { app, session, BrowserWindow, ipcMain, Menu } from 'electron'
 import { createRequire } from 'node:module'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
@@ -36,7 +36,7 @@ console.log(process.versions)
 let win: BrowserWindow | null
 function createWindow() {
   win = new BrowserWindow({
-    icon: path.join(process.env.VITE_PUBLIC, 'electron-vite.svg'),
+    frame: false, // This removes the default frame
     webPreferences: {
       preload: path.join(__dirname, 'preload.mjs'),
     },
@@ -98,6 +98,24 @@ ipcMain.on('chat-messages-cleared', () => {
   app.exit() // Now exit the app
 })
 
+// Add these IPC handlers
+ipcMain.on('minimize-window', () => {
+  BrowserWindow.getFocusedWindow()?.minimize()
+})
+
+ipcMain.on('maximize-window', () => {
+  const win = BrowserWindow.getFocusedWindow()
+  if (win?.isMaximized()) {
+    win.unmaximize()
+  } else {
+    win?.maximize()
+  }
+})
+
+ipcMain.on('close-window', () => {
+  BrowserWindow.getFocusedWindow()?.close()
+})
+
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
@@ -125,5 +143,22 @@ app.on('activate', () => {
 })
 
 app.whenReady().then(createWindow)
-// app.whenReady().then(
-// )
+
+const template = [
+  {
+    label: 'File',
+    submenu: [
+      { label: 'New', click: () => { /* ... */ } },
+      { label: 'Open', click: () => { /* ... */ } },
+      { label: 'Save', click: () => { /* ... */ } },
+    ]
+  },
+  // ... other menu items ...
+];
+
+app.on('ready', () => {
+  // Set custom styles for the menu
+  Menu.getApplicationMenu()!.items.forEach(item => {
+    item.label = `<span style="font-size: 128px;">${item.label}</span>`;
+  });
+});
