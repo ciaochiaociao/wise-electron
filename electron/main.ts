@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url'
 import path from 'node:path'
 import net from 'node:net'
 import os from 'node:os'
-import { startListening } from './audioProcessor'
+import { startListening } from './audioProcess'
 console.log("main.ts")
 
 const require = createRequire(import.meta.url)
@@ -59,7 +59,7 @@ function createWindow() {
 
   startListening(async (transcription) => {
     console.log("transcription: " + transcription)
-    if (transcription.toLowerCase().includes('hello')) {
+    if (transcription.toLowerCase().includes('hello') || transcription.toLowerCase().includes('allo')) {
       console.log("key word detected, show window")
       win!.show()
       win!.focus()

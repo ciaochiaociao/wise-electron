@@ -31,14 +31,14 @@ async function startListening(callback) {
     console.log("Starting recording cycle");
     audioRecorder.start().stream().pipe(outputFileStream);
 
-    await new Promise(resolve => setTimeout(resolve, 5000)); // Adjust this timeout as needed
+    await new Promise(resolve => setTimeout(resolve, 2000)); // Adjust this timeout as needed
 
     console.log("Stopping recording...");
     audioRecorder.stop();
     outputFileStream.end();
     
     // Add a small delay to ensure the file is fully written
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise(resolve => setTimeout(resolve, 100));
     
     const stats = fs.statSync(outputFilePath);
     console.log(`File size after recording: ${stats.size} bytes`);
