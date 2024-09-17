@@ -2,8 +2,6 @@ import { OpenAI } from 'openai';
 import fs from 'fs';
 import path from 'path';
 import AudioRecorder from 'node-audiorecorder';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
 import { app } from 'electron';
 
 console.log("import.meta.env.VITE_OPENAI_API_KEY", import.meta.env.VITE_OPENAI_API_KEY)
