@@ -63,6 +63,7 @@ function createWindow() {
       console.log("key word detected, show window")
       win!.show()
       win!.focus()
+      win!.webContents.send('keyword-detected')
     }
   }).catch(error => {
     console.error("Error in startListening:", error);

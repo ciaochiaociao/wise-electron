@@ -21,6 +21,11 @@ import PieIcon from './assets/pie.svg?react'
 function App() {
   const [activePage, setActivePage] = useState('ChartPage');
 
+  window.ipcRenderer.on('keyword-detected', (event) => {
+    console.log("keyword detected")
+    setActivePage('MyChatbot')
+  })
+
   return (
     <>
       <SidebarContainer>
