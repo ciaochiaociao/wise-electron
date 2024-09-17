@@ -28,6 +28,10 @@ function App() {
   const [emotionDetectionEnabled, setEmotionDetectionEnabled] = useState(true);
   const [keywordAwakeningEnabled, setKeywordAwakeningEnabled] = useState(true);
   const [focusDetectionEnabled, setFocusDetectionEnabled] = useState(false);
+  const [automaticFocusBoostingEnabled, setAutomaticFocusBoostingEnabled] = useState(false);
+  const [automaticPostureReminderEnabled, setAutomaticPostureReminderEnabled] = useState(false);
+  const [emotionDetectionSwitch, setEmotionDetectionSwitch] = useState(false);
+  const [postureDetectionSwitch, setPostureDetectionSwitch] = useState(false);
   const emotionInterval = useRef<number | null>(null)
 
   useEffect(() => {
@@ -100,13 +104,44 @@ function App() {
         </ErrorBoundary>}
         {activePage === 'ChartPage' && <ErrorBoundary><EmotionDashboard /></ErrorBoundary>}
         {activePage === 'ConfigPage' && <ErrorBoundary>
-          <ConfigPage 
-            emotionDetectionEnabled={emotionDetectionEnabled}
-            setEmotionDetectionEnabled={setEmotionDetectionEnabled}
-            keywordAwakeningEnabled={keywordAwakeningEnabled}
-            setKeywordAwakeningEnabled={setKeywordAwakeningEnabled}
-            focusDetectionEnabled={focusDetectionEnabled}
-            setFocusDetectionEnabled={setFocusDetectionEnabled}
+          <ConfigPage
+            options={[
+              {
+                label: "Keyword Awakening",
+                enabled: keywordAwakeningEnabled,
+                setEnabled: setKeywordAwakeningEnabled
+              },
+              {
+                label: "Automatic Emotion Boosting",
+                enabled: emotionDetectionEnabled,
+                setEnabled: setEmotionDetectionEnabled
+              },
+              {
+                label: "Automatic Focus Boosting (Coming)",
+                enabled: automaticFocusBoostingEnabled,
+                setEnabled: setAutomaticFocusBoostingEnabled
+              },
+              {
+                label: "Automatic Posture Reminder (Coming)",  
+                enabled: automaticPostureReminderEnabled,
+                setEnabled: setAutomaticPostureReminderEnabled
+              },
+              {
+                label: "Emotion Detection",
+                enabled: emotionDetectionSwitch,
+                setEnabled: setEmotionDetectionSwitch
+              },
+              {
+                label: "Focus Detection (Coming)",
+                enabled: focusDetectionEnabled,
+                setEnabled: setFocusDetectionEnabled
+              },
+              {
+                label: "Posture Detection (Coming)",
+                enabled: postureDetectionSwitch,
+                setEnabled: setPostureDetectionSwitch
+              }
+            ]}
           />
         </ErrorBoundary>}
       </SidebarContainer>
