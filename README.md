@@ -35,8 +35,8 @@ $ yarn
 $ yarn build
 ```
 
-Or set the ssl strict rule to false:
+or set the ssl strict rule to false:
 ```bash
 $ yarn config set strict-ssl false
 ```
-
+as needed.
