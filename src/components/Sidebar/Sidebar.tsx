@@ -1,15 +1,14 @@
-import { ReactNode } from 'react'
+import React from 'react'
+import './Sidebar.css'
 
-const Sidebar = ({ children } : {  children: ReactNode }) => {
-
+const Sidebar: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (
-    
-    <div className='w-16'>
-      <div className="sidebar fixed h-full shadow-md text-white">
+    <div className="sidebar">
+      <nav className="sidebar-nav">
         {children}
-      </div>
+      </nav>
     </div>
   )
 }
 
-export default Sidebar;
+export default Sidebar

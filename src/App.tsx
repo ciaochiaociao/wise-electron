@@ -75,17 +75,23 @@ function App() {
       <TitleBar />
       <SidebarContainer>
         <Sidebar>
-          <ul className='list-none p-0'>
-            <li className='cursor-pointer p-2 hover:bg-gray-700 text-white' onClick={() => setActivePage('MyChatbot')}><BubbleIcon className='w-7 m-auto'/></li>
-            <li className='cursor-pointer p-2 hover:bg-gray-700 text-white' onClick={() => setActivePage('ChartPage')}><PieIcon className='w-7 m-auto'/></li>
-            <li className='cursor-pointer p-2 hover:bg-gray-700 text-white' onClick={() => setActivePage('ConfigPage')}><SettingsIcon className='w-6 m-auto'/></li>
-          </ul>
+          <div className="sidebar-top">
+            <ul>
+              <li onClick={() => setActivePage('MyChatbot')}><BubbleIcon /></li>
+              <li onClick={() => setActivePage('ChartPage')}><PieIcon /></li>
+            </ul>
+          </div>
+          <div className="sidebar-bottom">
+            <ul>
+              <li onClick={() => setActivePage('ConfigPage')}><SettingsIcon /></li>
+            </ul>
+          </div>
         </Sidebar>
         {activePage === 'MyChatbot' && <ErrorBoundary>
           <MyChatbot 
             emotionDetection={emotionDetection}
             setEmotionDetection={setEmotionDetection} />
-          </ErrorBoundary>}
+        </ErrorBoundary>}
         {activePage === 'ChartPage' && <ErrorBoundary><EmotionDashboard /></ErrorBoundary>}
         {activePage === 'ConfigPage' && <ErrorBoundary>
           <ConfigPage 

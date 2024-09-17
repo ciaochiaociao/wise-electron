@@ -17,12 +17,12 @@ const ConfigPage: React.FC<ConfigPageProps> = ({ emotionDetectionEnabled, setEmo
           onChange={setEmotionDetectionEnabled}
           className={`${
             emotionDetectionEnabled ? 'bg-blue-600' : 'bg-gray-200'
-          } relative inline-flex h-6 w-11 items-center rounded-full`}
+          } relative inline-flex h-6 w-16 items-center rounded-full p-0`}
         >
           <span className="sr-only">Enable emotion detection</span>
           <span
             className={`${
-              emotionDetectionEnabled ? 'translate-x-6' : 'translate-x-1'
+              emotionDetectionEnabled ? 'translate-x-11' : 'translate-x-1'
             } inline-block h-4 w-4 transform rounded-full bg-white transition`}
           />
         </Switch>
