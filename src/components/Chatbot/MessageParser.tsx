@@ -2,7 +2,22 @@ import React from 'react'
 import type { Actions } from './ActionProvider';
 // import Chat from '../../react-chatbot-kit/src/components/Chat/Chat'
 
+function textParser(input: string): { type: string; value?: number | null } {
+  const brightnessRegex = /Set the brightness to (\d*\.?\d*%?)/i;
+  const brightnessMatch = input.match(brightnessRegex);
 
+  if (brightnessMatch) {
+    let value: string | number | null = brightnessMatch[1];
+    if (value.includes('%')) {
+      value = parseFloat(value.replace('%', '')) / 100;
+    } else {
+      value = parseFloat(value);
+    }
+    return { type: 'setBrightness', value };
+  }
+
+  return { type: 'generalChat' };
+}
 
 interface ChildProps {
   parse: (message: string) => void;
@@ -20,43 +35,36 @@ export interface MessageParserProps {
 
 const MessageParser = ({ children, actions, emotionDetection, setEmotionDetection }: MessageParserProps) => {
   const parse = (message: string) => {
-    
-    // console.log("Testing storage event:")
-    // localStorage.setItem("boostMood", "true");
-
     if (emotionDetection === "asking") {
-      if (message === "yes") {
-        setEmotionDetection("boosting mood");
-        actions.handleBoostMood();
-        console.log("User answers yes to boosting mood");
-      } else if (message === "no") {
-        setEmotionDetection("detecting");
-        console.log("User answers no mood boost");
-      } else {
-        console.warn("User answers with something else (to be handled)");
-        // todo: handle other answers
-        actions.handleGeneralChat(message);
-      }
+      handleEmotionDetection(message);
       return;
     }
-    const brightnessRegex = /Set the brightness to (\d*\.?\d*%?)/i;
-    const brightnessMatch = message.match(brightnessRegex);
 
-    if (brightnessMatch) {
-      let value: string | number | null = brightnessMatch ? brightnessMatch[1] : null;
-      if (value !== null) {
-        if (value.includes('%')) {
-          value = value.replace('%', '');
-          value = parseFloat(value) / 100;
-        } else {
-          value = parseFloat(value);
-        }
-      }
+    const parsedMessage = textParser(message);
 
-      console.log("Set the brightness with prompt: " + value);
-      actions.handleSetBrightness(message, value as number);
+    switch (parsedMessage.type) {
+      case 'setBrightness':
+        console.log("Set the brightness with prompt: " + parsedMessage.value);
+        actions.handleSetBrightness(message, parsedMessage.value as number);
+        break;
+      case 'generalChat':
+      default:
+        console.log(message);
+        actions.handleGeneralChat(message);
+    }
+  };
+
+  const handleEmotionDetection = (message: string) => {
+    if (message === "yes") {
+      setEmotionDetection("boosting mood");
+      actions.handleBoostMood();
+      console.log("User answers yes to boosting mood");
+    } else if (message === "no") {
+      setEmotionDetection("detecting");
+      console.log("User answers no mood boost");
     } else {
-      console.log(message);
+      console.warn("User answers with something else (to be handled)");
+      // todo: handle other answers
       actions.handleGeneralChat(message);
     }
   };
