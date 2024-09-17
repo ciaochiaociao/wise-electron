@@ -4,7 +4,7 @@ import EmotionDashboard from './pages/EmotionDashboard'
 import Sidebar from './components/Sidebar/Sidebar'
 import SidebarContainer from './components/SidebarContainer/SidebarContainer'
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import BubbleIcon from './assets/chat-bubble.svg?react'
 import PieIcon from './assets/pie.svg?react'
 // window.addEventListener("storage", () => {
@@ -21,10 +21,16 @@ import PieIcon from './assets/pie.svg?react'
 function App() {
   const [activePage, setActivePage] = useState('ChartPage');
 
-  window.ipcRenderer.on('keyword-detected', (event) => {
-    console.log("keyword detected")
-    setActivePage('MyChatbot')
-  })
+  useEffect(() => {
+    const handleKeywordDetected = () => {
+      console.log("keyword detected")
+      setActivePage('MyChatbot')
+    }
+    window.ipcRenderer.on('keyword-detected', handleKeywordDetected)
+    return () => {
+      window.ipcRenderer.off('keyword-detected', handleKeywordDetected)
+    }
+  }, []);
 
   return (
     <>

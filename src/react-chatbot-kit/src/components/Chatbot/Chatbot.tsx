@@ -88,6 +88,27 @@ const Chatbot = ({
   const botName = getBotName(config);
   const customMessages = getCustomMessages(config);
   // console.log("emotionDetection ", emotionDetection)
+
+  useEffect(() => {
+    const listener = (event) => {
+      console.log("keyword detected")
+      const botMessageStr = "You call me? what's up?"
+      chatbot.addAIMessageToChatHistory(botMessageStr)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      setState((prev: any) => ({
+        ...prev,
+        messages: [
+          ...prev.messages,
+          createChatBotMessage(botMessageStr, {loading: false})
+        ]
+      }))
+    }
+    window.ipcRenderer.on('keyword-detected', listener)
+    return () => {
+      window.ipcRenderer.off('keyword-detected', listener)
+    }
+  }, [])
+
   useEffect(() => {
     if (emotionDetection == "bad") {
       console.log("Bad emotion detected!") // Test emotion detection
