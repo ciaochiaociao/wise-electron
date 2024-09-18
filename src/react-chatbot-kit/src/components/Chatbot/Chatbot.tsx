@@ -123,7 +123,9 @@ const Chatbot = ({
         ...prev,
         messages: [
           ...prev.messages,
-          createChatBotMessage(botMessageStr, null)
+          createChatBotMessage(botMessageStr, {
+            widget: "yesNoButtons",
+          })
         ]
       }))
       console.log("State updated")

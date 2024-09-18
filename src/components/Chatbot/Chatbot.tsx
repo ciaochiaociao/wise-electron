@@ -1,4 +1,4 @@
-import config from './config.js'
+import config from './config'
 
 import MessageParser from './MessageParser'
 import ActionProvider from './ActionProvider'

@@ -13,6 +13,15 @@ interface ChatBotMessage {
 // Declare the config object
 declare const config: {
   initialMessages: ChatBotMessage[];
+  widgets: {
+    widgetName: string;
+    widgetFunc: (props: any) => React.ReactNode;
+  }[];
+  customStyles: {
+    botMessageBox: {
+      backgroundColor: string;
+    };
+  };
 };
 
 // Export the config object as the default export

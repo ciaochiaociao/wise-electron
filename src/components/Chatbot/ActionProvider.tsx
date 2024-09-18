@@ -25,6 +25,8 @@ export type Actions = {
   handleSetBrightness: (message: string, value: number) => void
   handleGeneralChat: (message: string) => void
   handleBoostMood: () => void
+  handleYesClick: () => void
+  handleNoClick: () => void
 }
 
 interface ChildProps {
@@ -103,6 +105,26 @@ const ActionProvider: React.FC<ActionProviderProps> = ({ createChatBotMessage, s
     }});
   };
 
+  const handleYesClick = () => {
+    console.log("User clicked Yes");
+    setEmotionDetection("boosting mood");
+    handleBoostMood();
+  };
+
+  const handleNoClick = () => {
+    console.log("User clicked No");
+    setEmotionDetection("detecting");
+    const botMessageStr = "Alright, I won't boost your mood. Let me know if you need anything else!";
+    chatbot.addAIMessageToChatHistory(botMessageStr);
+    setState((prev: any) => ({
+      ...prev,
+      messages: [...prev.messages, createChatBotMessage(botMessageStr)],
+    }));
+    setTimeout(() => {
+      window.systemControls.bringToBackground();
+    }, 3000);
+  };
+
   return (
     <>
       {React.Children.map(children, (child) => {
@@ -112,6 +134,8 @@ const ActionProvider: React.FC<ActionProviderProps> = ({ createChatBotMessage, s
               handleSetBrightness,
               handleGeneralChat,
               handleBoostMood,
+              handleYesClick,
+              handleNoClick,
             },
           });
         } else {
