@@ -14,6 +14,7 @@
     "@headlessui/react": "^2.1.8",
     "brightness": "^3.0.0",
     "chart.js": "^4.4.4",
+    "inferencejs": "^1.0.12",
     "langchain": "^0.2.8",
     "nircmd": "^2.0.0",
     "node-audiorecorder": "^3.0.0",

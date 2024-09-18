@@ -7,10 +7,11 @@ import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary'
 import { useRef, useEffect, useState } from 'react'
 import BubbleIcon from './assets/chat-bubble.svg?react'
 import PieIcon from './assets/pie.svg?react'
-import React from 'react'
+import LiveViewIcon from './assets/live-view.svg?react'
+import SettingsIcon from './assets/settings.svg?react'
 import TitleBar from './components/TitleBar/TitleBar'
 import ConfigPage from './pages/ConfigPage'
-import SettingsIcon from './assets/settings.svg?react'
+import LiveViewPage from './pages/LiveViewPage'
 // window.addEventListener("storage", () => {
 //   console.log("Storage event")
 //   const boostMood = localStorage.getItem("boostMood")
@@ -93,6 +94,7 @@ function App() {
           </div>
           <div className="sidebar-bottom">
             <ul>
+              <li onClick={() => setActivePage('LiveViewPage')}><LiveViewIcon /></li>
               <li onClick={() => setActivePage('ConfigPage')}><SettingsIcon /></li>
             </ul>
           </div>
@@ -144,6 +146,7 @@ function App() {
             ]}
           />
         </ErrorBoundary>}
+        {activePage === 'LiveViewPage' && <ErrorBoundary><LiveViewPage /></ErrorBoundary>}
       </SidebarContainer>
     </div>
   )
