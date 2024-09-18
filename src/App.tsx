@@ -53,6 +53,7 @@ function App() {
           setActivePage("MyChatbot")
           setEmotionDetection("bad")
           console.log("emotionDetection changed: bad")
+          window.systemControls.bringToForeground()
         }
       }, 3000)
       console.log("Emotion interval started")
@@ -71,7 +72,7 @@ function App() {
       if (keywordAwakeningEnabled) {
         console.log("keyword detected")
         setActivePage('MyChatbot')
-        window.ipcRenderer.send('bring-to-foreground')
+        window.systemControls.bringToForeground()
       }
     }
     window.ipcRenderer.on('keyword-detected', handleKeywordDetected)

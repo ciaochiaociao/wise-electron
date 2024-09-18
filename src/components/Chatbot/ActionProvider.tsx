@@ -4,7 +4,8 @@ import chatbot from '../../processes/Chatbot'
 declare global {
   interface Window {
     systemControls: {
-      setBrightness: (value: number) => void
+      setBrightness: (value: number) => void;
+      bringToForeground: () => void;
     }
   }
 }

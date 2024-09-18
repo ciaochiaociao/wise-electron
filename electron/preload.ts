@@ -29,6 +29,9 @@ contextBridge.exposeInMainWorld('systemControls', {
     console.log(value)
     ipcRenderer.send('set-brightness', value);
   },
+  bringToForeground: () => {
+    ipcRenderer.send('bring-to-foreground');
+  }
 })
 
 contextBridge.exposeInMainWorld('hmx', {

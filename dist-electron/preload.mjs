@@ -24,6 +24,9 @@ electron.contextBridge.exposeInMainWorld("systemControls", {
   setBrightness: (value) => {
     console.log(value);
     electron.ipcRenderer.send("set-brightness", value);
+  },
+  bringToForeground: () => {
+    electron.ipcRenderer.send("bring-to-foreground");
   }
 });
 electron.contextBridge.exposeInMainWorld("hmx", {

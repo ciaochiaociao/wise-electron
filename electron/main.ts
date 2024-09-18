@@ -6,6 +6,7 @@ import net from 'node:net'
 import os from 'node:os'
 import { startListening } from './audioProcess'
 console.log("main.ts")
+import { screen } from 'electron'
 
 const require = createRequire(import.meta.url)
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -35,12 +36,50 @@ console.log(process.versions)
 
 let win: BrowserWindow | null
 function createWindow() {
+  const { width: screenWidth } = screen.getPrimaryDisplay().workAreaSize
+
   win = new BrowserWindow({
+    width: 400, // Adjust the width as needed
+    height: 600, // Adjust the height as needed
+    x: screenWidth, // Start off-screen to the right
+    y: 0, // Position from top
+    alwaysOnTop: true,
     frame: false, // This removes the default frame
+    show: false, // Don't show the window immediately
     webPreferences: {
       preload: path.join(__dirname, 'preload.mjs'),
     },
   })
+
+  // Show window and start animation
+  win.once('ready-to-show', () => {
+    win!.show()
+    win!.focus()
+  })
+
+  win.on('focus', () => {
+    win!.show()
+    animateWindow()
+  })
+
+  win.on('close', (e) => {
+    e.preventDefault() // Prevent the window from closing immediately
+    win!.webContents.send('clear-chat-messages')
+  })
+
+  win.on('blur', () => {
+    animateWindowOut()
+  })
+
+  // Handle 'bring-to-foreground' event
+  ipcMain.on('bring-to-foreground', () => {
+    console.log("bring-to-foreground in the main process")
+    if (win && !win.isDestroyed()) {
+      win.show()
+      win.focus()
+    }
+  })
+
   ipcMain.on('set-brightness', (_event, value: number) => {
     brightness.set(value)
     console.log("set brightness in the main process")
@@ -85,11 +124,52 @@ function createWindow() {
     // win.loadFile('dist/index.html')
     win.loadFile(path.join(RENDERER_DIST, 'index.html'))
   }
+}
 
-  win.on('close', (e) => {
-    e.preventDefault() // Prevent the window from closing immediately
-    win!.webContents.send('clear-chat-messages')
-  })
+function animateWindow() {
+  const { width: screenWidth } = screen.getPrimaryDisplay().workAreaSize
+  console.log("screenWidth: " + screenWidth)
+  const targetX = screenWidth - 400
+  let currentX = screenWidth
+
+  const animate = () => {
+    if (currentX > targetX) {
+      currentX -= 20 // Adjust this value to change animation speed
+      win!.setBounds({
+        x: Math.floor(currentX),
+        y: 0,
+        width: 400,
+        height: 600
+      }, true) // The 'true' parameter enables animation
+     setTimeout(animate, 10) // Adjust this value to change animation smoothness
+    }
+  }
+
+  win!.show()
+  animate()
+}
+
+function animateWindowOut() {
+  const { width: screenWidth } = screen.getPrimaryDisplay().workAreaSize
+  console.log("screenWidth: " + screenWidth)
+  let currentX = screenWidth - 400
+  
+  const animate = () => {
+    if (currentX < screenWidth) {
+      currentX += 20 // Adjust for animation speed
+      win!.setBounds({
+        x: Math.floor(currentX),
+        y: 0,
+        width: 400,
+        height: 600
+      }, true)
+      setTimeout(animate, 10)
+    } else {
+      // win!.hide()
+    }
+  }
+
+  animate()
 }
 
 // Add this listener
