@@ -49,7 +49,8 @@ const LiveViewPage: React.FC = () => {
 
           drawBoxes(predictions, ctx);
         }
-        requestAnimationFrame(detectFrame);
+        // Schedule next frame with a delay
+      setTimeout(() => requestAnimationFrame(detectFrame), 100); // Adjust delay as needed
       };
 
       detectFrame();
@@ -67,8 +68,6 @@ const LiveViewPage: React.FC = () => {
 
   const drawBoxes = (predictions: any[], ctx: CanvasRenderingContext2D | null) => {
     if (!ctx) return;
-
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     ctx.strokeStyle = "#00FFFF";
     ctx.lineWidth = 4;
     ctx.font = "18px Arial";
@@ -77,6 +76,8 @@ const LiveViewPage: React.FC = () => {
     predictions.forEach((prediction) => {
       const x = prediction.bbox.x - prediction.bbox.width / 2;
       const y = prediction.bbox.y - prediction.bbox.height / 2;
+      console.log("drawing box", x, y, prediction.bbox.width, prediction.bbox.height);
+      // ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
       ctx.strokeRect(x, y, prediction.bbox.width, prediction.bbox.height);
       ctx.fillText(
         `${prediction.class} ${(prediction.confidence * 100).toFixed(2)}%`,
