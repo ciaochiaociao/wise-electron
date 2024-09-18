@@ -27,6 +27,9 @@ electron.contextBridge.exposeInMainWorld("systemControls", {
   },
   bringToForeground: () => {
     electron.ipcRenderer.send("bring-to-foreground");
+  },
+  bringToBackground: () => {
+    electron.ipcRenderer.send("bring-to-background");
   }
 });
 electron.contextBridge.exposeInMainWorld("hmx", {

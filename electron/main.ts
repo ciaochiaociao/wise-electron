@@ -242,3 +242,10 @@ app.on('ready', () => {
     item.label = `<span style="font-size: 128px;">${item.label}</span>`;
   });
 });
+
+// Add this listener
+ipcMain.on('bring-to-background', () => {
+  if (win) {
+    win.blur()
+  }
+});

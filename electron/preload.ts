@@ -31,6 +31,9 @@ contextBridge.exposeInMainWorld('systemControls', {
   },
   bringToForeground: () => {
     ipcRenderer.send('bring-to-foreground');
+  },
+  bringToBackground: () => {
+    ipcRenderer.send('bring-to-background');
   }
 })
 

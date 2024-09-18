@@ -118,6 +118,9 @@ const MessageParser = ({ children, actions, emotionDetection, setEmotionDetectio
     } else if (message === "no") {
       setEmotionDetection("detecting");
       console.log("User answers no mood boost");
+      setTimeout(() => {
+        window.systemControls.bringToBackground();
+      }, 3000);
     } else {
       console.warn("User answers with something else (to be handled)");
       // todo: handle other answers

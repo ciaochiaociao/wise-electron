@@ -6,6 +6,7 @@ declare global {
     systemControls: {
       setBrightness: (value: number) => void;
       bringToForeground: () => void;
+      bringToBackground: () => void;
     }
   }
 }
