@@ -61,15 +61,22 @@
 
 .video-container {
   margin: 3em auto 1em auto;
-  width: 80%;
+  height: 60%;
+  text-align: center;
+  position: relative;
+}
+
+.video-container video, .detection-canvas {
+  position: absolute;
+  margin: auto;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .detection-canvas {
-  position: absolute;
-  width: 80%;
-  /* height: 74.4%; */
-  top: 3em;
-  left: 10%;
   z-index: 2;
   pointer-events: none;
 }
