@@ -9,12 +9,14 @@ import BubbleIcon from './assets/chat-bubble.svg?react'
 import PieIcon from './assets/pie.svg?react'
 import LiveViewIcon from './assets/live-view.svg?react'
 import SettingsIcon from './assets/settings.svg?react'
+import VoiceIcon from './assets/voice.svg?react'
+import EmotionIcon from './assets/emotion.svg?react'
 import TitleBar from './components/TitleBar/TitleBar'
 import ConfigPage from './pages/ConfigPage'
 import LiveViewPage from './pages/LiveViewPage'
 import chatbot from './processes/Chatbot'
 import VoiceInteractionPage from './pages/VoiceInteractionPage'
-import VoiceIcon from './assets/voice.svg?react'
+import LiveViewEmotionPage from './pages/LiveViewEmotionPage'
 
 function App() {
   const [activePage, setActivePage] = useState('ChartPage');
@@ -105,6 +107,7 @@ function App() {
           <div className="sidebar-bottom">
             <ul>
               <li onClick={() => setActivePage('LiveViewPage')}><LiveViewIcon /></li>
+              <li onClick={() => setActivePage('LiveViewEmotionPage')}><EmotionIcon /></li>
               <li onClick={() => setActivePage('ConfigPage')}><SettingsIcon /></li>
             </ul>
           </div>
@@ -157,6 +160,7 @@ function App() {
           />
         </ErrorBoundary>}
         {activePage === 'LiveViewPage' && <ErrorBoundary><LiveViewPage /></ErrorBoundary>}
+        {activePage === 'LiveViewEmotionPage' && <ErrorBoundary><LiveViewEmotionPage /></ErrorBoundary>}
         {activePage === 'VoiceInteractionPage' && <ErrorBoundary><VoiceInteractionPage /></ErrorBoundary>}
       </SidebarContainer>
     </div>
