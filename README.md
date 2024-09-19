@@ -31,11 +31,8 @@ Install the app from the release folder (the .exe file).
    yarn --version
    ```
 
-### 3. Install wise-electron
-Download and run the .exe file from the release folder.
 
-
-## Build from source
+### 3. Build from source
 It is useful to build from source if you want to use a custom OpenAI API key, or the key is not valid anymore.
 
 Set the OpenAI API key in the .env file with the following format:
