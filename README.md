@@ -1,17 +1,38 @@
 # wise-electron
- An edge-AI and LLM powered Smart Assistant in laptop
+An edge-AI and LLM powered Smart Assistant for laptops
 
 ## Requirements
 - Windows 11 OS
+- Node.js (20.15.0)
+- Yarn package manager
 
-## Development
-```bash
-$ yarn
-$ yarn dev
-```
-
-## Install
+## Installation
 Install the app from the release folder (the .exe file).
+
+## Development Environment Setup
+
+### 1. Install Node.js
+1. Visit the [official Node.js website](https://nodejs.org/)
+2. Download the LTS version for Windows
+3. Run the installer and follow the prompts
+4. Verify installation by opening a command prompt and running:
+   ```bash
+   node --version
+   ```
+
+### 2. Install Yarn
+1. Open a command prompt
+2. Run the following command:
+   ```bash
+   npm install -g yarn
+   ```
+3. Verify installation by running:
+   ```bash
+   yarn --version
+   ```
+
+### 3. Install wise-electron
+Download and run the .exe file from the release folder.
 
 
 ## Build from source
