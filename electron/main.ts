@@ -4,8 +4,9 @@ import { fileURLToPath } from 'node:url'
 import path from 'node:path'
 import net from 'node:net'
 import os from 'node:os'
-import { startListening } from './audioProcess'
+import { startListening, stopListening } from './audioProcess'
 import { screen } from 'electron'
+import { exec } from 'child_process'
 
 const require = createRequire(import.meta.url)
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -253,4 +254,25 @@ ipcMain.on('clear-chat-messages', () => {
   if (win) {
     win.webContents.send('clear-chat-messages');
   }
+});
+
+ipcMain.on('start-listening', () => {
+  startListening((transcription) => {
+    win!.webContents.send('transcription-result', transcription);
+  });
+});
+
+ipcMain.on('stop-listening', () => {
+  stopListening();
+});
+
+ipcMain.on('speak-text', (_event, text) => {
+  exec(`powershell -command "Add-Type -AssemblyName System.Speech; (New-Object System.Speech.Synthesis.SpeechSynthesizer).Speak('${text}')"`, (error, stdout, stderr) => {
+    if (error) {
+      console.error(`exec error: ${error}`);
+      return;
+    }
+    console.log(`stdout: ${stdout}`);
+    console.error(`stderr: ${stderr}`);
+  });
 });

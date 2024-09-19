@@ -13,16 +13,8 @@ import TitleBar from './components/TitleBar/TitleBar'
 import ConfigPage from './pages/ConfigPage'
 import LiveViewPage from './pages/LiveViewPage'
 import chatbot from './processes/Chatbot'
-// window.addEventListener("storage", () => {
-//   console.log("Storage event")
-//   const boostMood = localStorage.getItem("boostMood")
-//   if (boostMood !== null) {
-//     console.log("boostMood: " + boostMood)
-//   } else {
-//     console.log("boostMood is null")
-//   }
-// })
-
+import VoiceInteractionPage from './pages/VoiceInteractionPage'
+import VoiceIcon from './assets/voice.svg?react'
 
 function App() {
   const [activePage, setActivePage] = useState('ChartPage');
@@ -106,6 +98,7 @@ function App() {
           <div className="sidebar-top">
             <ul>
               <li onClick={() => setActivePage('MyChatbot')}><BubbleIcon /></li>
+              <li onClick={() => setActivePage('VoiceInteractionPage')}><VoiceIcon /></li>
               <li onClick={() => setActivePage('ChartPage')}><PieIcon /></li>
             </ul>
           </div>
@@ -164,6 +157,7 @@ function App() {
           />
         </ErrorBoundary>}
         {activePage === 'LiveViewPage' && <ErrorBoundary><LiveViewPage /></ErrorBoundary>}
+        {activePage === 'VoiceInteractionPage' && <ErrorBoundary><VoiceInteractionPage /></ErrorBoundary>}
       </SidebarContainer>
     </div>
   )

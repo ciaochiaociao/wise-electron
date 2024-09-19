@@ -80,4 +80,8 @@ async function transcribeAudio(filePath) {
   }
 }
 
-export { startListening };
+function stopListening() {
+  audioRecorder.stop();
+}
+
+export { startListening, stopListening };
