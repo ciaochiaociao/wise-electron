@@ -103,7 +103,7 @@ const RealTimeMeter = () => {
 
   return (
     <div>
-      <canvas ref={canvasRef} width="300" height="50" />
+      <canvas ref={canvasRef} width="300" height="50" className="m-auto" />
     </div>
   );
 };

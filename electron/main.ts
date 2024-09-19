@@ -5,7 +5,6 @@ import path from 'node:path'
 import net from 'node:net'
 import os from 'node:os'
 import { startListening } from './audioProcess'
-console.log("main.ts")
 import { screen } from 'electron'
 
 const require = createRequire(import.meta.url)
@@ -42,7 +41,7 @@ function createWindow() {
     width: 400, // Adjust the width as needed
     height: 600, // Adjust the height as needed
     x: screenWidth, // Start off-screen to the right
-    y: 0, // Position from top
+    y: 40, // Position from top
     alwaysOnTop: true,
     frame: false, // This removes the default frame
     show: false, // Don't show the window immediately
@@ -65,6 +64,7 @@ function createWindow() {
   win.on('close', (e) => {
     e.preventDefault() // Prevent the window from closing immediately
     win!.webContents.send('clear-chat-messages')
+    app.exit() // Now exit the app
   })
 
   win.on('blur', () => {
@@ -137,7 +137,7 @@ function animateWindow() {
       currentX -= 20 // Adjust this value to change animation speed
       win!.setBounds({
         x: Math.floor(currentX),
-        y: 0,
+        y: 40,
         width: 400,
         height: 600
       }, true) // The 'true' parameter enables animation
@@ -159,7 +159,7 @@ function animateWindowOut() {
       currentX += 20 // Adjust for animation speed
       win!.setBounds({
         x: Math.floor(currentX),
-        y: 0,
+        y: 40,
         width: 400,
         height: 600
       }, true)
@@ -175,7 +175,6 @@ function animateWindowOut() {
 // Add this listener
 ipcMain.on('chat-messages-cleared', () => {
   console.log('Chat messages cleared')
-  app.exit() // Now exit the app
 })
 
 // Add these IPC handlers
@@ -247,5 +246,11 @@ app.on('ready', () => {
 ipcMain.on('bring-to-background', () => {
   if (win) {
     win.blur()
+  }
+});
+
+ipcMain.on('clear-chat-messages', () => {
+  if (win) {
+    win.webContents.send('clear-chat-messages');
   }
 });

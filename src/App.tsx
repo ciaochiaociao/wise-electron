@@ -12,6 +12,7 @@ import SettingsIcon from './assets/settings.svg?react'
 import TitleBar from './components/TitleBar/TitleBar'
 import ConfigPage from './pages/ConfigPage'
 import LiveViewPage from './pages/LiveViewPage'
+import chatbot from './processes/Chatbot'
 // window.addEventListener("storage", () => {
 //   console.log("Storage event")
 //   const boostMood = localStorage.getItem("boostMood")
@@ -80,6 +81,21 @@ function App() {
       window.ipcRenderer.off('keyword-detected', handleKeywordDetected)
     }
   }, [keywordAwakeningEnabled])
+
+  useEffect(() => {
+    const handleClearMessages = () => {
+      localStorage.removeItem('chat_messages');
+      chatbot.clear_chat_history();
+      setEmotionDetection("detecting");
+    };
+
+    window.ipcRenderer.on('clear-chat-messages', handleClearMessages);
+
+    return () => {
+      window.ipcRenderer.off('clear-chat-messages', handleClearMessages);
+    };
+  }, []);
+
 
 
   return (

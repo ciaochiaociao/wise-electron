@@ -111,7 +111,7 @@ const EmotionDashboard = () => {
 
 
   return (
-    <div className="mx-auto p-4 w-full">
+    <div className="mx-auto p-4 w-full overflow-y-scroll">
       <>
         <div className="mb-4">
           <select
