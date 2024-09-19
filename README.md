@@ -35,11 +35,11 @@ Install the app from the release folder (the .exe file).
 ### 3. Build from source
 It is useful to build from source if you want to use a custom OpenAI API key, or the key is not valid anymore.
 
-Set the OpenAI API key in the .env file with the following format:
+Create a .env file in the root folder and create an envrionment variable to store your OpenAI API key in the .env file with the following format:
 ```bash
 VITE_OPENAI_API_KEY=<your-openai-api-key>
 ```
-Note how VITE_OPENAI_API_KEY is prefixed with VITE_.
+Note how `VITE_OPENAI_API_KEY` is prefixed with `VITE_`.
 
 ```bash
 $ yarn
